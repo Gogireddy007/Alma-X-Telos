@@ -6,3 +6,4 @@ __pycache__/
 *.npz
 validation_runs/*/sealed_outputs/
 validation_runs/*/rollouts/
+validation_runs/DEBUG_harness/

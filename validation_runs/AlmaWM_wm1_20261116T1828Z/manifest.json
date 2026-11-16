@@ -15,6 +15,65 @@
   "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/truth_sim_test.npz": {
    "sha256": "3086f257d0ac0913fe21d51ac1775bc30d96aa85956003ac3aa43a0b5b9e1460",
    "utc": "2026-11-16T18:33:22Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/inputs_sim_tanks.npz": {
+   "sha256": "d74c26289c3c039ec08c8369f6403eb74b646bd237d2eae67cf60932a532c2cb",
+   "utc": "2026-11-16T18:34:01Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/truth_sim_tanks.npz": {
+   "sha256": "6e37b6d975aa99dc13cc58c9e4160f29b8f60f18376ce09608bb30d02526a854",
+   "utc": "2026-11-16T18:34:01Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/inputs_plan_test.npz": {
+   "sha256": "4199127b042743e446d099285673625ca417b9d546898fed3e524cb86033fb2f",
+   "utc": "2026-11-16T18:34:06Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/truth_plan_test.npz": {
+   "sha256": "e0b703c274f47a2166bb303aa4bfde6caef09bc783a962da8b59da1327ce7490",
+   "utc": "2026-11-16T18:34:06Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/inputs_real.npz": {
+   "sha256": "931f5383b787d7897ec9a394890cd2181141855be6e38c5304b389d74dd7dfdf",
+   "utc": "2026-11-16T18:35:09Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/truth_real.npz": {
+   "sha256": "f7b68ac45135ced42e0ae6b775a3d07acffb6c09c06d4708a8762945804325ec",
+   "utc": "2026-11-16T18:35:09Z"
   }
+ },
+ "weights": {
+  "runs/alma_wm1/ema_8000.pt": {
+   "sha256": "463f9c011caae4370af29cdc9c073a0a4cf2ea8ec68dea1cce637f5075917929",
+   "utc": "2026-11-16T22:15:55Z"
+  }
+ },
+ "sealed": {
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/sealed_outputs/pred_sim_val.npz": {
+   "sha256": "0cffd52ec3686bd03cfdfd5b8099b67a2bd419e96dc95cb17b4b2e448167ce1f",
+   "utc": "2026-11-16T22:16:18Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/sealed_outputs/pred_sim_test.npz": {
+   "sha256": "8c244dc315c8addcb18dba3f177db3cc8328dee34d245f45d2499159dcdc4380",
+   "utc": "2026-11-16T22:17:25Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/sealed_outputs/pred_sim_tanks.npz": {
+   "sha256": "ad44d89633b54ed623a976972f9f6ebf7ac15e5a0862c423f5c27dad30441d02",
+   "utc": "2026-11-16T22:17:47Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/sealed_outputs/pred_plan_test.npz": {
+   "sha256": "0a5ae942a4711f4af867ef8e7c7bd21e847a7b845a7247150b969d39e5fe119b",
+   "utc": "2026-11-16T22:18:07Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/sealed_outputs/pred_real.npz": {
+   "sha256": "c01d32ef8a1b0a289e9bdcc726f576383a1b7ec7673a323976ed16d6234e2ddb",
+   "utc": "2026-11-16T22:24:22Z"
+  }
+ },
+ "truth_loaded": {
+  "sim_test": "2026-11-16T22:26:37Z",
+  "sim_val": "2026-11-16T22:26:44Z",
+  "sim_tanks": "2026-11-16T22:26:44Z",
+  "plan_test": "2026-11-16T22:26:59Z",
+  "real": "2026-11-16T22:27:01Z"
  }
 }

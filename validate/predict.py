@@ -215,12 +215,19 @@ def run_real(model, v2: AlmaForecaster, telos: bool = True) -> None:
         out["persistence"].append(persistence(ctx, H))
         idx_all.append(np.array(idx))
         log(f"real {tk}: {len(idx)} windows ({time.time() - t0:.0f}s)")
-    arrays = {k: np.array(v, dtype=object) for k, v in out.items()}
-    seal("pred_real", tasks=np.array(tasks), idx=np.array(idx_all, dtype=object), **arrays)
+    def objarr(lst):
+        a = np.empty(len(lst), dtype=object)
+        for i, v in enumerate(lst):
+            a[i] = v
+        return a
+
+    arrays = {k: objarr(v) for k, v in out.items()}
+    seal("pred_real", tasks=np.array(tasks), idx=objarr(idx_all), **arrays)
     log("sealed pred_real")
 
 
 if __name__ == "__main__":
+    torch.set_grad_enabled(False)
     ap = argparse.ArgumentParser()
     ap.add_argument("--ckpt", required=True)
     ap.add_argument("--suites", nargs="+", default=["sim_val", "sim_test", "sim_tanks", "plan_test", "real"])

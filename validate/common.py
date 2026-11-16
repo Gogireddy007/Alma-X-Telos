@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 os.chdir(ROOT)
 
-RUN = ROOT / (ROOT / "validation_runs/CURRENT").read_text().strip()
+RUN = ROOT / os.environ.get("VALRUN", (ROOT / "validation_runs/CURRENT").read_text().strip())
 QS = np.array([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9])
 CTX, HZ = 2048, 512  # simulated episodes: context and future length
 PATCH = 16
