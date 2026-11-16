@@ -1,0 +1,12 @@
+{
+ "harness": {
+  "validation_runs/AlmaV3_fc_20261116T2349Z/harness/inputs_real.npz": {
+   "sha256": "f5e597315629955cc189b81c3b0ad22d47978ab8824d0fbf0bbbbf9e4c4fae24",
+   "utc": "2026-11-16T23:50:00Z"
+  },
+  "validation_runs/AlmaV3_fc_20261116T2349Z/harness/truth_real.npz": {
+   "sha256": "f648594085dc8ae9e32e64b333fb6045866f01c3ef911b8180ec18c3fda77c92",
+   "utc": "2026-11-16T23:50:00Z"
+  }
+ }
+}

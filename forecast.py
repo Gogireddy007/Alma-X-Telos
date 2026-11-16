@@ -24,6 +24,10 @@ class AlmaForecaster:
     @classmethod
     def load(cls, path: str, device: str = "cpu", **kw) -> "AlmaForecaster":
         ck = torch.load(path, map_location="cpu", weights_only=False)
+        if ck["config"].get("arch") == "v3":
+            from model_v3 import load_v3
+
+            return cls(load_v3(path, "cpu"), device, **kw)
         model = Alma(config_from_dict(ck["config"]))
         model.load_state_dict(ck["ema"] if "ema" in ck else ck["model"])
         return cls(model, device, **kw)

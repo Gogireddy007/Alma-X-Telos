@@ -23,12 +23,12 @@ from data import PATCH, WINDOW, TrainStream
 from model import Alma, AlmaConfig, config_to_dict, quantile_loss
 
 
-def quick_eval(model: Alma, device: str, cache: str = "data/gift_cache", n_win: int = 64) -> dict:
+def quick_eval(model: Alma, device: str, cache: str = "data/gift_cache", n_win: int = 64, context_len: int = 2048) -> dict:
     """Fast proxy on cached GIFT-Eval windows (first n_win per task), relative to Seasonal Naive."""
     from eval_gift import QUANTILES, score, seasonal_naive
     from forecast import AlmaForecaster
 
-    f = AlmaForecaster(model, device, symmetric=False, batch_size=128)
+    f = AlmaForecaster(model, device, context_len=context_len, symmetric=False, batch_size=128)
     rels = []
     for p in sorted(glob.glob(f"{cache}/*__1000.npz")):
         z = np.load(p, allow_pickle=True)
