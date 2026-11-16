@@ -1,0 +1,142 @@
+W1115 21:30:26.426000 90612 .venv/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/135 [00:00<?, ?it/s]Loading weights: 100%|██████████| 135/135 [00:00<00:00, 3630.97it/s]
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gift_eval/data.py:151: FutureWarning: 'A-DEC' is deprecated and will be removed in a future version, please use 'YE-DEC' instead.
+  freq = norm_freq_str(to_offset(self.freq).name)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/time_feature/seasonality.py:47: FutureWarning: 'A-DEC' is deprecated and will be removed in a future version, please use 'YE-DEC' instead.
+  offset = pd.tseries.frequencies.to_offset(freq)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/dataset/common.py:263: FutureWarning: 'A-DEC' is deprecated and will be removed in a future version, please use 'Y-DEC' instead.
+  return pd.Period(val, freq)
+[  1/97] m4_yearly/short                            H=   6 n=1000 relCRPS=0.683 relMASE=0.785 (1.7s)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gift_eval/data.py:151: FutureWarning: 'Q-DEC' is deprecated and will be removed in a future version, please use 'QE-DEC' instead.
+  freq = norm_freq_str(to_offset(self.freq).name)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/time_feature/seasonality.py:47: FutureWarning: 'Q-DEC' is deprecated and will be removed in a future version, please use 'QE-DEC' instead.
+  offset = pd.tseries.frequencies.to_offset(freq)
+[  2/97] m4_quarterly/short                         H=   8 n=1000 relCRPS=0.632 relMASE=0.756 (1.7s)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gift_eval/data.py:151: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  freq = norm_freq_str(to_offset(self.freq).name)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/time_feature/seasonality.py:47: FutureWarning: 'M' is deprecated and will be removed in a future version, please use 'ME' instead.
+  offset = pd.tseries.frequencies.to_offset(freq)
+[  3/97] m4_monthly/short                           H=  18 n=1000 relCRPS=0.679 relMASE=0.783 (2.5s)
+[  4/97] m4_weekly/short                            H=  13 n= 359 relCRPS=0.706 relMASE=1.110 (3.2s)
+[  5/97] m4_daily/short                             H=  14 n=1000 relCRPS=0.806 relMASE=1.153 (16.5s)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gift_eval/data.py:151: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+  freq = norm_freq_str(to_offset(self.freq).name)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/time_feature/seasonality.py:47: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+  offset = pd.tseries.frequencies.to_offset(freq)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/dataset/common.py:263: FutureWarning: 'H' is deprecated and will be removed in a future version, please use 'h' instead.
+  return pd.Period(val, freq)
+[  6/97] m4_hourly/short                            H=  48 n= 414 relCRPS=0.472 relMASE=1.044 (2.6s)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gift_eval/data.py:151: FutureWarning: 'T' is deprecated and will be removed in a future version, please use 'min' instead.
+  freq = norm_freq_str(to_offset(self.freq).name)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/time_feature/seasonality.py:47: FutureWarning: 'T' is deprecated and will be removed in a future version, please use 'min' instead.
+  offset = pd.tseries.frequencies.to_offset(freq)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/dataset/common.py:263: FutureWarning: 'T' is deprecated and will be removed in a future version, please use 'min' instead.
+  return pd.Period(val, freq)
+[  7/97] electricity/15T/short                      H=  48 n=1000 relCRPS=0.523 relMASE=0.645 (26.7s)
+[  8/97] electricity/H/short                        H=  48 n=1000 relCRPS=0.580 relMASE=0.720 (27.8s)
+[  9/97] electricity/D/short                        H=  30 n=1000 relCRPS=0.634 relMASE=0.810 (9.1s)
+[ 10/97] electricity/W/short                        H=   8 n=1000 relCRPS=0.520 relMASE=0.816 (2.2s)
+[ 11/97] solar/10T/short                            H=  48 n=1000 relCRPS=0.832 relMASE=1.016 (29.4s)
+[ 12/97] solar/H/short                              H=  48 n=1000 relCRPS=0.753 relMASE=0.933 (41.7s)
+[ 13/97] solar/D/short                              H=  30 n= 274 relCRPS=0.683 relMASE=0.850 (7.6s)
+[ 14/97] solar/W/short                              H=   8 n= 137 relCRPS=0.597 relMASE=0.838 (0.3s)
+[ 15/97] hospital/short                             H=  12 n= 767 relCRPS=0.723 relMASE=0.822 (1.9s)
+[ 16/97] covid_deaths/short                         H=  30 n= 266 relCRPS=0.315 relMASE=0.808 (25.1s)
+[ 17/97] us_births/D/short                          H=  30 n=  20 relCRPS=0.252 relMASE=0.316 (1.0s)
+[ 18/97] us_births/M/short                          H=  12 n=   2 relCRPS=1.110 relMASE=1.507 (0.0s)
+[ 19/97] us_births/W/short                          H=   8 n=  14 relCRPS=0.648 relMASE=0.855 (0.2s)
+[ 20/97] saugeenday/D/short                         H=  30 n=  20 relCRPS=0.810 relMASE=0.976 (0.7s)
+[ 21/97] saugeenday/M/short                         H=  12 n=   7 relCRPS=0.613 relMASE=0.756 (0.1s)
+[ 22/97] saugeenday/W/short                         H=   8 n=  20 relCRPS=0.557 relMASE=0.682 (0.5s)
+[ 23/97] temperature_rain_with_missing/short        H=  30 n=1000 relCRPS=0.609 relMASE=0.698 (4.8s)
+[ 24/97] kdd_cup_2018_with_missing/H/short          H=  48 n=1000 relCRPS=0.555 relMASE=0.703 (57.5s)
+[ 25/97] kdd_cup_2018_with_missing/D/short          H=  30 n= 540 relCRPS=0.699 relMASE=0.781 (2.9s)
+[ 26/97] car_parts_with_missing/short               H=  12 n=1000 relCRPS=0.609 relMASE=0.754 (1.6s)
+[ 27/97] restaurant/short                           H=  30 n= 807 relCRPS=0.534 relMASE=0.695 (2.7s)
+[ 28/97] hierarchical_sales/D/short                 H=  30 n= 826 relCRPS=0.548 relMASE=0.665 (10.1s)
+[ 29/97] hierarchical_sales/W/short                 H=   8 n= 472 relCRPS=0.568 relMASE=0.717 (1.6s)
+[ 30/97] LOOP_SEATTLE/5T/short                      H=  48 n=1000 relCRPS=0.570 relMASE=0.710 (27.5s)
+[ 31/97] LOOP_SEATTLE/H/short                       H=  48 n=1000 relCRPS=0.546 relMASE=0.670 (26.4s)
+[ 32/97] LOOP_SEATTLE/D/short                       H=  30 n= 646 relCRPS=0.412 relMASE=0.510 (1.8s)
+[ 33/97] SZ_TAXI/15T/short                          H=  48 n=1000 relCRPS=0.579 relMASE=0.734 (18.4s)
+[ 34/97] SZ_TAXI/H/short                            H=  48 n= 312 relCRPS=0.616 relMASE=0.784 (1.6s)
+[ 35/97] M_DENSE/H/short                            H=  48 n= 600 relCRPS=0.433 relMASE=0.557 (15.6s)
+[ 36/97] M_DENSE/D/short                            H=  30 n=  90 relCRPS=0.350 relMASE=0.446 (0.5s)
+[ 37/97] ett1/15T/short                             H=  48 n= 140 relCRPS=0.558 relMASE=0.754 (3.7s)
+[ 38/97] ett1/H/short                               H=  48 n= 140 relCRPS=0.677 relMASE=0.850 (3.7s)
+[ 39/97] ett1/D/short                               H=  30 n=  21 relCRPS=0.691 relMASE=0.973 (0.1s)
+[ 40/97] ett1/W/short                               H=   8 n=  14 relCRPS=0.714 relMASE=0.903 (0.0s)
+[ 41/97] ett2/15T/short                             H=  48 n= 140 relCRPS=0.555 relMASE=0.729 (3.7s)
+[ 42/97] ett2/H/short                               H=  48 n= 140 relCRPS=0.652 relMASE=0.821 (3.8s)
+[ 43/97] ett2/D/short                               H=  30 n=  21 relCRPS=0.809 relMASE=1.038 (0.1s)
+[ 44/97] ett2/W/short                               H=   8 n=  14 relCRPS=0.769 relMASE=0.920 (0.0s)
+[ 45/97] jena_weather/10T/short                     H=  48 n= 420 relCRPS=0.405 relMASE=0.382 (11.4s)
+[ 46/97] jena_weather/H/short                       H=  48 n= 399 relCRPS=0.671 relMASE=0.748 (12.0s)
+[ 47/97] jena_weather/D/short                       H=  30 n=  42 relCRPS=0.645 relMASE=0.757 (0.2s)
+[ 48/97] bitbrains_fast_storage/5T/short            H=  48 n=1000 relCRPS=0.421 relMASE=0.801 (57.7s)
+[ 49/97] bitbrains_fast_storage/H/short             H=  48 n=1000 relCRPS=0.808 relMASE=0.885 (19.1s)
+[ 50/97] bitbrains_rnd/5T/short                     H=  48 n=1000 relCRPS=0.618 relMASE=0.792 (76.8s)
+[ 51/97] bitbrains_rnd/H/short                      H=  48 n=1000 relCRPS=0.621 relMASE=0.996 (18.2s)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gift_eval/data.py:151: FutureWarning: 'S' is deprecated and will be removed in a future version, please use 's' instead.
+  freq = norm_freq_str(to_offset(self.freq).name)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/time_feature/seasonality.py:47: FutureWarning: 'S' is deprecated and will be removed in a future version, please use 's' instead.
+  offset = pd.tseries.frequencies.to_offset(freq)
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/meridian/.venv/lib/python3.11/site-packages/gluonts/dataset/common.py:263: FutureWarning: 'S' is deprecated and will be removed in a future version, please use 's' instead.
+  return pd.Period(val, freq)
+[ 52/97] bizitobs_application/short                 H=  60 n=  30 relCRPS=0.752 relMASE=1.636 (3.6s)
+[ 53/97] bizitobs_service/short                     H=  60 n= 630 relCRPS=0.716 relMASE=1.603 (49.7s)
+[ 54/97] bizitobs_l2c/5T/short                      H=  48 n= 140 relCRPS=0.228 relMASE=0.286 (12.5s)
+[ 55/97] bizitobs_l2c/H/short                       H=  48 n=  42 relCRPS=0.330 relMASE=0.425 (2.0s)
+[ 56/97] electricity/15T/medium                     H= 480 n=1000 relCRPS=0.693 relMASE=0.841 (52.0s)
+[ 57/97] electricity/15T/long                       H= 720 n=1000 relCRPS=0.612 relMASE=0.841 (37.8s)
+[ 58/97] electricity/H/medium                       H= 480 n=1000 relCRPS=0.667 relMASE=0.799 (30.1s)
+[ 59/97] electricity/H/long                         H= 720 n=1000 relCRPS=0.678 relMASE=0.813 (31.5s)
+[ 60/97] solar/10T/medium                           H= 480 n=1000 relCRPS=0.707 relMASE=0.865 (29.5s)
+[ 61/97] solar/10T/long                             H= 720 n=1000 relCRPS=0.742 relMASE=0.938 (31.4s)
+[ 62/97] solar/H/medium                             H= 480 n= 274 relCRPS=0.787 relMASE=0.975 (8.3s)
+[ 63/97] solar/H/long                               H= 720 n= 274 relCRPS=0.723 relMASE=0.914 (8.5s)
+[ 64/97] kdd_cup_2018_with_missing/H/medium         H= 480 n= 540 relCRPS=0.643 relMASE=0.733 (15.7s)
+[ 65/97] kdd_cup_2018_with_missing/H/long           H= 720 n= 540 relCRPS=0.634 relMASE=0.754 (16.0s)
+[ 66/97] LOOP_SEATTLE/5T/medium                     H= 480 n=1000 relCRPS=0.535 relMASE=0.684 (50.1s)
+[ 67/97] LOOP_SEATTLE/5T/long                       H= 720 n=1000 relCRPS=0.536 relMASE=0.678 (57.2s)
+[ 68/97] LOOP_SEATTLE/H/medium                      H= 480 n= 646 relCRPS=0.510 relMASE=0.630 (33.4s)
+[ 69/97] LOOP_SEATTLE/H/long                        H= 720 n= 646 relCRPS=0.464 relMASE=0.588 (35.1s)
+[ 70/97] SZ_TAXI/15T/medium                         H= 480 n= 156 relCRPS=0.607 relMASE=0.775 (5.4s)
+[ 71/97] SZ_TAXI/15T/long                           H= 720 n= 156 relCRPS=0.604 relMASE=0.764 (4.8s)
+[ 72/97] M_DENSE/H/medium                           H= 480 n= 120 relCRPS=0.377 relMASE=0.472 (5.5s)
+[ 73/97] M_DENSE/H/long                             H= 720 n=  90 relCRPS=0.417 relMASE=0.510 (4.8s)
+[ 74/97] ett1/15T/medium                            H= 480 n= 105 relCRPS=0.694 relMASE=0.860 (4.9s)
+[ 75/97] ett1/15T/long                              H= 720 n=  70 relCRPS=0.672 relMASE=0.865 (4.8s)
+[ 76/97] ett1/H/medium                              H= 480 n=  28 relCRPS=0.652 relMASE=0.806 (1.5s)
+[ 77/97] ett1/H/long                                H= 720 n=  21 relCRPS=0.700 relMASE=0.890 (1.1s)
+[ 78/97] ett2/15T/medium                            H= 480 n= 105 relCRPS=0.699 relMASE=0.866 (5.0s)
+[ 79/97] ett2/15T/long                              H= 720 n=  70 relCRPS=0.744 relMASE=0.904 (3.6s)
+[ 80/97] ett2/H/medium                              H= 480 n=  28 relCRPS=0.687 relMASE=0.864 (1.4s)
+[ 81/97] ett2/H/long                                H= 720 n=  21 relCRPS=0.772 relMASE=0.936 (1.1s)
+[ 82/97] jena_weather/10T/medium                    H= 480 n= 231 relCRPS=0.630 relMASE=0.828 (12.2s)
+[ 83/97] jena_weather/10T/long                      H= 720 n= 168 relCRPS=0.701 relMASE=0.825 (8.6s)
+[ 84/97] jena_weather/H/medium                      H= 480 n=  42 relCRPS=0.745 relMASE=0.923 (2.1s)
+[ 85/97] jena_weather/H/long                        H= 720 n=  42 relCRPS=0.671 relMASE=0.852 (2.2s)
+[ 86/97] bitbrains_fast_storage/5T/medium           H= 480 n=1000 relCRPS=0.699 relMASE=0.837 (50.1s)
+[ 87/97] bitbrains_fast_storage/5T/long             H= 720 n=1000 relCRPS=0.699 relMASE=0.889 (56.5s)
+[ 88/97] bitbrains_rnd/5T/medium                    H= 480 n=1000 relCRPS=0.709 relMASE=0.993 (58.5s)
+[ 89/97] bitbrains_rnd/5T/long                      H= 720 n=1000 relCRPS=0.704 relMASE=0.981 (60.1s)
+[ 90/97] bizitobs_application/medium                H= 600 n=   4 relCRPS=1.556 relMASE=2.748 (0.2s)
+[ 91/97] bizitobs_application/long                  H= 900 n=   2 relCRPS=1.560 relMASE=2.495 (0.1s)
+[ 92/97] bizitobs_service/medium                    H= 600 n=  84 relCRPS=1.556 relMASE=2.785 (4.0s)
+[ 93/97] bizitobs_service/long                      H= 900 n=  42 relCRPS=1.606 relMASE=2.837 (2.2s)
+[ 94/97] bizitobs_l2c/5T/medium                     H= 480 n=  49 relCRPS=0.423 relMASE=0.559 (2.2s)
+[ 95/97] bizitobs_l2c/5T/long                       H= 720 n=  35 relCRPS=0.485 relMASE=0.646 (1.7s)
+[ 96/97] bizitobs_l2c/H/medium                      H= 480 n=   7 relCRPS=0.257 relMASE=0.345 (0.3s)
+[ 97/97] bizitobs_l2c/H/long                        H= 720 n=   7 relCRPS=0.319 relMASE=0.409 (0.2s)
+{
+ "model": "telos",
+ "ckpt": null,
+ "tasks": 97,
+ "max_windows": 1000,
+ "gmean_rel_crps": 0.6167447338576747,
+ "gmean_rel_mase": 0.8090030242967143,
+ "elapsed_s": 1441.208841085434,
+ "crps_skill_pct": 38.32552661423253,
+ "mase_skill_pct": 19.099697570328566
+}

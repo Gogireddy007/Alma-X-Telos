@@ -1,0 +1,57 @@
+{
+ "summary": {
+  "model": "snaive",
+  "ckpt": null,
+  "tasks": 3,
+  "max_windows": 400,
+  "gmean_rel_crps": 1.0,
+  "gmean_rel_mase": 1.0,
+  "elapsed_s": 2.8651630878448486,
+  "crps_skill_pct": 0.0,
+  "mase_skill_pct": 0.0
+ },
+ "per_task": [
+  {
+   "task": "m4_yearly/short",
+   "H": 6,
+   "season": 1,
+   "windows": 400,
+   "total_windows": 22974,
+   "crps": 0.1583705627232361,
+   "mase": 3.8853888246217547,
+   "sn_crps": 0.1583705627232361,
+   "sn_mase": 3.8853888246217547,
+   "rel_crps": 1.0,
+   "rel_mase": 1.0,
+   "secs": 0.0024471282958984375
+  },
+  {
+   "task": "m4_hourly/short",
+   "H": 48,
+   "season": 24,
+   "windows": 400,
+   "total_windows": 414,
+   "crps": 0.04827180452764615,
+   "mase": 1.19342250392161,
+   "sn_crps": 0.04827180452764615,
+   "sn_mase": 1.19342250392161,
+   "rel_crps": 1.0,
+   "rel_mase": 1.0,
+   "secs": 0.0032167434692382812
+  },
+  {
+   "task": "solar/10T/long",
+   "H": 720,
+   "season": 144,
+   "windows": 400,
+   "total_windows": 1096,
+   "crps": 0.46253250848781263,
+   "mase": 0.9031440532797013,
+   "sn_crps": 0.46253250848781263,
+   "sn_mase": 0.9031440532797013,
+   "rel_crps": 1.0,
+   "rel_mase": 1.0,
+   "secs": 0.040283918380737305
+  }
+ ]
+}

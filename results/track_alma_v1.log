@@ -1,0 +1,11 @@
+CKPT step=2000 {"tasks": 97, "rel_crps": 0.6767767705231077, "rel_mase": 0.8729371760826662}
+CKPT step=4000 {"tasks": 97, "rel_crps": 0.6425862903913829, "rel_mase": 0.824605556096414}
+CKPT step=6000 {"tasks": 97, "rel_crps": 0.6291593794303152, "rel_mase": 0.801051615532681}
+CKPT step=8000 {"tasks": 97, "rel_crps": 0.6192698112942746, "rel_mase": 0.7898584987775564}
+CKPT step=10000 {"tasks": 97, "rel_crps": 0.6105537842898985, "rel_mase": 0.7824808583280146}
+CKPT step=12000 {"tasks": 97, "rel_crps": 0.6076969682744782, "rel_mase": 0.7763873945498865}
+CKPT step=14000 {"tasks": 97, "rel_crps": 0.6057496381011678, "rel_mase": 0.7770618261658853}
+CKPT step=16000 {"tasks": 97, "rel_crps": 0.6044080599814532, "rel_mase": 0.7756186081880276}
+CKPT step=18000 {"tasks": 97, "rel_crps": 0.6037250054910678, "rel_mase": 0.7760412139063655}
+CKPT step=20000 {"tasks": 97, "rel_crps": 0.6038164628310785, "rel_mase": 0.7759773970365734}
+TRAINING_EXITED
