@@ -34,3 +34,15 @@ Ratio is v2 CRPS / Telos CRPS, so above 1 means v2 is worse. Geometric mean 1.02
 
 ## Cost on the M4
 About 2× slower per step than v2, so 40k steps is about 40 h. A cheaper first pass is 12 × 512 for 15k steps (about 15 h), checked on quick-dev before committing to the full run.
+
+## Implementation status (2026-11-16, queued to start after wm2 validation)
+
+| # | Item | Implemented as | Verified |
+|---|---|---|---|
+| 1 | 12 × 512, warm-started from v2 | `model_v3.grow_from_v2`: exact width and depth growth, 61.8M parameters | v3 output equals v2's to within 8e-6 at 512, 2k and 4k contexts; quick-dev 0.60697 vs 0.60693 |
+| 2 | Longer training, long-horizon weight | 20k steps; `balanced_quantile_loss` (per-step mean × (1 + h/H)^0.5) | smoke test |
+| 3 | Stride-32 path, 8k context | `AlmaV3.encode`: steps older than 4,096 become stride-32 tokens with their own embedding and a shared time-axis RoPE; 35% of batches at 8k | 8k forward pass finite |
+| 4 | JEPA objective, shared with the world model | `JEPAHead` uses `model_wm.Predictor` (no actions) against an EMA target encoder; L1 + variance hinge, weight 0.5 | smoke test, resume test |
+| 5 | Fresh sealed set + full GIFT-Eval | `validate/fc_validate.py`: 8,300 windows / 28 tasks, seed 779, excludes the dev sample and the wm1/wm2 sets; pre-registration frozen; best quick-dev checkpoint selected; then the full 97-config GIFT-Eval | built and frozen |
+
+Pipeline: `run_v3.sh` (detached). It waits for wm2, then trains, selects, runs the sealed validation and runs the full GIFT-Eval.
