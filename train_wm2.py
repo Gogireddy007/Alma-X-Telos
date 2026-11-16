@@ -45,6 +45,7 @@ def main() -> None:
     ap.add_argument("--real", default="data/pretrain")
     ap.add_argument("--save-every", type=int, default=2000)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--resume", action="store_true")
     ap.add_argument("--device", default="mps" if torch.backends.mps.is_available() else "cpu")
     args = ap.parse_args()
     torch.manual_seed(args.seed)
@@ -87,6 +88,19 @@ def main() -> None:
     no_decay = [p for p in trn if p.ndim < 2]
     opt = torch.optim.AdamW([{"params": decay, "weight_decay": args.wd}, {"params": no_decay, "weight_decay": 0.0}],
                             lr=args.lr, betas=(0.9, 0.95))
+    step0 = 0
+    if args.resume and (out / "last.pt").exists():
+        r = torch.load(out / "last.pt", map_location="cpu", weights_only=False)
+        own = model.state_dict()
+        own.update(r["model"])
+        model.load_state_dict(own)
+        target.load_state_dict(r["target"])
+        own = ema.state_dict()
+        own.update(r["ema"])
+        ema.load_state_dict(own)
+        opt.load_state_dict(r["opt"])
+        step0 = int(r["step"])
+        print(f"RESUMED at step {step0}", flush=True)
     json.dump({"args": vars(args), "config": wm2_config_dict(cfg, wcfg), "params": n_params,
                "trainable": sum(p.numel() for p in trn),
                "init_from": args.init_from}, open(out / "run.json", "w"), indent=1)
@@ -98,13 +112,13 @@ def main() -> None:
         pr = (s - args.warmup) / max(1, args.steps - args.warmup)
         return 1e-2 * args.lr + (args.lr - 1e-2 * args.lr) * 0.5 * (1 + math.cos(math.pi * min(1.0, pr)))
 
-    dl = DataLoader(WMStream(args.real, seed=args.seed + 101, window=args.window, p_ctrl=args.p_ctrl,
+    dl = DataLoader(WMStream(args.real, seed=args.seed + 101 + step0, window=args.window, p_ctrl=args.p_ctrl,
                              kinds=TRAIN_KINDS_V2),
                     batch_size=args.bs, num_workers=args.workers, persistent_workers=args.workers > 0,
                     prefetch_factor=4 if args.workers > 0 else None)
     hz, N = cfg.horizon, args.window // PATCH
     log = open(out / "log.jsonl", "a")
-    step, t0, acc = 0, time.time(), {}
+    step, t0, acc = step0, time.time(), {}
     for x, m, u, um in dl:
         if step >= args.steps:
             break
@@ -143,9 +157,7 @@ def main() -> None:
             torch.save(ck, out / f"ema_{step}.pt")
             torch.save({**ck, "model": strip(model.state_dict()), "target": target.state_dict(),
                         "opt": opt.state_dict()}, out / "last.pt")
-            old = sorted(out.glob("ema_*.pt"), key=lambda p: int(p.stem.split("_")[1]))[:-3]
-            for p_ in old:  # disk is tight: keep the 3 latest EMA snapshots
-                p_.unlink()
+
             print(f"SAVED ema_{step}.pt", flush=True)
 
 

@@ -24,3 +24,4 @@ ctx4096,inference_variant,gift_quick_dev,
 alma_wm1,wm_config,none_yet,var weight raised 0.1->1.0 after 100-step smoke run (training loss only)
 wm2_design,design,none,frozen v2 path + ARX prior + positivity + 3 new families; decided from wm1 sealed results (wm1 holdouts are now burned)
 wm2_smoke_100,smoke,training loss only,100-step smoke test; no holdout
+wm2_restart,restart,none,first launch died at step 300 when the session ended (not result-driven); restarted from scratch with auto-resume
