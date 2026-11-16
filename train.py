@@ -84,6 +84,22 @@ def main() -> None:
         sd = src.get("ema", src.get("model"))
         h_old, nq = src["config"]["horizon"], cfg.n_q
         own = model.state_dict()
+        L_old, L_new = src["config"]["n_layers"], cfg.n_layers
+        if L_new > L_old:  # depth growth: keep old blocks in order, insert identity blocks (zero output proj)
+            per = L_new / L_old
+            new_idx = [int(round(j * per)) for j in range(L_old)]
+            remap = {}
+            for k, v in sd.items():
+                if k.startswith("blocks."):
+                    j = int(k.split(".")[1])
+                    remap[f"blocks.{new_idx[j]}." + k.split(".", 2)[2]] = v
+                else:
+                    remap[k] = v
+            sd = remap
+            for i in set(range(L_new)) - set(new_idx):
+                own[f"blocks.{i}.o.weight"].zero_()
+                own[f"blocks.{i}.w3.weight"].zero_()
+            print(f"depth growth {L_old} -> {L_new}: old blocks at {new_idx}", flush=True)
         for k, v in sd.items():
             if k in own and own[k].shape == v.shape:
                 own[k] = v
