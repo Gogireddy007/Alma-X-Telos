@@ -1,0 +1,3 @@
+- **Model built by:** Claude (AI coding agent), in this session.
+- **Validation code written by:** the same agent. **Not independent.**
+- **Named human reviewer:** none yet. This is required before any result is shared externally.

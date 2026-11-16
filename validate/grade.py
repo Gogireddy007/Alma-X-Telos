@@ -90,11 +90,12 @@ def grade_sim(ckpt: str, last: str) -> dict:
          "PASS" if growth <= TH["rollout"]["max_error_growth_ratio"] else "FAIL")
 
     # ---- 5.2 open vs closed loop -----------------------------------------------------------------
-    from model_wm import AlmaA, load_wm
+    from model_wm import AlmaA
+    from model_wm2 import load_any
     from data import prescale
     from data_wm import prescale_actions
 
-    model = load_wm(ckpt, "cpu")
+    model = load_any(ckpt, "cpu")
     ck = torch.load(last, map_location="cpu", weights_only=False)
     tgt = AlmaA(model.c)
     tgt.load_state_dict(ck["target"])
@@ -118,8 +119,11 @@ def grade_sim(ckpt: str, last: str) -> dict:
             zf = zt[:, CTX // PATCH : CTX // PATCH + nf]
             from model import from_frame
 
-            qcl = model.decode(zf, h[:, -1]).flatten(1, 2)
-            qcl = from_frame(qcl, mu[:, -1, None, None], sdd[:, -1, None, None], model.c.asinh_clip)[0].numpy()
+            if hasattr(model, "decode_states"):  # wm2: decoder also needs the ARX prior
+                qcl = model.decode_states(zf, xt[:, :CTX], mt[:, :CTX], ut, umt)[0].numpy()
+            else:
+                qcl = model.decode(zf, h[:, -1]).flatten(1, 2)
+                qcl = from_frame(qcl, mu[:, -1, None, None], sdd[:, -1, None, None], model.c.asinh_clip)[0].numpy()
             cl.append(wql(y[i], qcl * sc + loc, norm=sd[i]))
             ol.append(full["wm_aware"][i])
     cl, ol = np.array(cl), np.array(ol)
@@ -143,7 +147,7 @@ def grade_sim(ckpt: str, last: str) -> dict:
          " no joint sample paths", "required", "FAIL")
 
     # ---- 5.6 constraints --------------------------------------------------------------------------
-    nonneg = np.isin(kind, ["inventory", "pricing"])
+    nonneg = np.isin(kind, ["inventory", "pricing", "logistic"])
     viol = float((P["wm_aware"][nonneg][..., 4] < 0).mean()) if nonneg.any() else 0.0
     card("5.6", "physical constraint violations (median < 0 for non-negative systems)", round(viol, 4),
          "<= 0.01", "PASS" if viol <= TH["rollout"]["constraint_violation_rate_max"] else "FAIL")

@@ -14,7 +14,7 @@ N_MC = 64
 
 
 def clip_kind(kind: str, u0: np.ndarray) -> np.ndarray:
-    return np.clip(u0, 0, None) if kind in ("thermal", "inventory", "tanks") else u0
+    return np.clip(u0, 0, None) if kind in ("thermal", "inventory", "tanks", "logistic") else u0
 
 
 def mc_future(p, u, nz, rng, n=N_MC):
@@ -98,8 +98,9 @@ def build_planning(name: str, seeds: range, kinds: tuple, n_cand: int = 16) -> N
     log(f"built {name}: {len(X)} episodes")
 
 
-def build_real(per_task: int = 300, seed: int = 777) -> None:
-    """Sealed GIFT-Eval windows: not in the seed-0 development sample, tasks with > 1000 windows."""
+def build_real(per_task: int = 300, seed: int = 777, exclude_seeds: tuple = ()) -> None:
+    """Sealed GIFT-Eval windows: not in the seed-0 development sample, tasks with > 1000 windows.
+    exclude_seeds: windows drawn for earlier (already graded) runs are excluded too."""
     import os
 
     from dotenv import load_dotenv
@@ -119,6 +120,12 @@ def build_real(per_task: int = 300, seed: int = 777) -> None:
             continue
         dev = set(np.random.default_rng(0).choice(np.arange(len(pairs)), size=1000, replace=False).tolist())
         rest = np.array([i for i in range(len(pairs)) if i not in dev])
+        for es in exclude_seeds:  # reproduce the earlier run's draw and drop it
+            used = set(np.random.default_rng(es).choice(rest, size=min(per_task, len(rest)), replace=False).tolist())
+            rest = np.array([i for i in rest if i not in used])
+        if len(rest) < 50:
+            log(f"real holdout {name}/{term}: skipped, only {len(rest)} unused windows")
+            continue
         pick = np.sort(np.random.default_rng(seed).choice(rest, size=min(per_task, len(rest)), replace=False))
         H, season = ds.prediction_length, get_seasonality(ds.freq)
         for i in pick:
@@ -138,6 +145,13 @@ if __name__ == "__main__":
     import sys
 
     which = sys.argv[1:] or ["sim", "real"]
+    if "wm2" in which:  # fresh seeds for Alma-WM2; real windows exclude everything graded for wm1
+        build_sim("sim_val", range(501000, 501240), S.TRAIN_KINDS_V2, with_mc=False)
+        build_sim("sim_test", range(901000, 901800), S.TRAIN_KINDS_V2)
+        build_sim("sim_tanks", range(911000, 911200), S.HELDOUT_KINDS)
+        build_planning("plan_test", range(921000, 921100), ("thermal", "fopdt", "lss", "pricing"))
+        build_real(seed=778, exclude_seeds=(777,))
+        which = []
     if "sim" in which:
         build_sim("sim_val", range(500000, 500200), S.TRAIN_KINDS, with_mc=False)
         build_sim("sim_test", range(900000, 900600), S.TRAIN_KINDS)

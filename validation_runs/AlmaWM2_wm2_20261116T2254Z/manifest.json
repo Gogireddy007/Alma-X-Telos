@@ -1,0 +1,44 @@
+{
+ "harness": {
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/inputs_sim_val.npz": {
+   "sha256": "ca20d144dcd5ed8f1e1d3e3ab1c9be93b35429c4951311143116c0a2330d1533",
+   "utc": "2026-11-16T22:54:53Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/truth_sim_val.npz": {
+   "sha256": "a281526080d92716ad0cc898aac3662f5d53748b7552bba6adff29594e1a7d50",
+   "utc": "2026-11-16T22:54:53Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/inputs_sim_test.npz": {
+   "sha256": "f796b97b0e063989ae702d5248bcc6d9446ae0c0d61cd85a5b11c0757dbc5f7b",
+   "utc": "2026-11-16T22:56:59Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/truth_sim_test.npz": {
+   "sha256": "59d9c8565c6f3dbf998b8527401c4d7220b735cad271ddefaab1296994c926df",
+   "utc": "2026-11-16T22:56:59Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/inputs_sim_tanks.npz": {
+   "sha256": "c2833703a7f2eca1f1777a15fe9946dda832864f77d0b1eaebbe7191afa5f47f",
+   "utc": "2026-11-16T22:57:37Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/truth_sim_tanks.npz": {
+   "sha256": "a2fa2f739dae13eb9c863ca4e662d2f0613e00e101f0bcf29fbe8df400fc6a63",
+   "utc": "2026-11-16T22:57:37Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/inputs_plan_test.npz": {
+   "sha256": "d1206d05d4335d26008d7ecfd13ca2d8109b4f85610494b2e0a5bddf4a97daf9",
+   "utc": "2026-11-16T22:57:42Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/truth_plan_test.npz": {
+   "sha256": "06c20ca08831acff0e05bad74bc19d49031a95554e1ac509ab6f89f0f6bea7a3",
+   "utc": "2026-11-16T22:57:42Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/inputs_real.npz": {
+   "sha256": "9479ce938370517092501bc80928c4b1709ad595078b3b1eb0c338eac18fadda",
+   "utc": "2026-11-16T22:59:03Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/harness/truth_real.npz": {
+   "sha256": "f03d8a8b368b38ae1079fad25836e751d99218ac47c67c9bfe790385c7130cb0",
+   "utc": "2026-11-16T22:59:03Z"
+  }
+ }
+}

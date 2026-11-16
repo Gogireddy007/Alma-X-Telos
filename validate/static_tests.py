@@ -13,7 +13,7 @@ import time
 import numpy as np
 import torch
 
-from common import CTX, HZ, PATCH, RUN, log, sha256, wql
+from common import load_truth, CTX, HZ, PATCH, RUN, log, sha256, wql
 
 CARD: list[dict] = []
 
@@ -59,39 +59,51 @@ def gate1() -> None:
     card("1.9", "missing-data report (2,000 sampled series)", round(float(nanfrac), 4), "reported", "REPORTED")
 
 
-def gate2_overlap(n_per_task: int = 2, k: int = 12) -> None:
-    """Exact-match scan: do sealed real label windows appear verbatim in the pretraining values?"""
+def gate2_overlap(n_per_task: int = 2, k: int = 12, min_distinct: int = 6) -> None:
+    """Exact-match scan: do sealed real windows appear verbatim in the pretraining values?
+
+    Queries: the last k context values AND the first k label values of n_per_task windows per task.
+    Amendment (wm2): a query needs >= min_distinct distinct values; low-entropy patterns such as sparse
+    0/1 demand recur by chance and are skipped (counted). Runs after sealing, so reading labels is allowed.
+    """
     vals = np.memmap("data/pretrain/values.f32", dtype=np.float32, mode="r")
     z = np.load(RUN / "harness/inputs_real.npz", allow_pickle=True)
-    # labels are truth: scan with CONTEXT tails instead (they precede the labels and are not graded)
+    lab = load_truth("real")["labels"]
     C, meta = z["contexts"], z["meta"]
     tasks = {}
     for i, m in enumerate(meta):
         tasks.setdefault(m[0], []).append(i)
-    hits, tested = 0, 0
     chunk = 200_000_000
-    queries = []
+    queries, skipped = [], 0
     for tk, ids in tasks.items():
         for i in ids[:n_per_task]:
-            c = np.asarray(C[i], np.float32)
-            c = c[np.isfinite(c)][-k:]
-            if len(c) == k and np.ptp(c) > 0:
-                queries.append((tk, c))
-    found = {tk: False for tk, _ in queries}
+            for kind, arr in (("context", np.asarray(C[i], np.float32)), ("label", np.asarray(lab[i], np.float32))):
+                a = arr[np.isfinite(arr)]
+                q = a[-k:] if kind == "context" else a[:k]
+                if len(q) == k and len(np.unique(q)) >= min_distinct:
+                    queries.append((tk, kind, q))
+                else:
+                    skipped += 1
+    found = {}
     for s in range(0, len(vals), chunk):
         block = np.asarray(vals[s : s + chunk + k])
-        for tk, q in queries:
-            L = len(block) - k
+        L = len(block) - k
+        for tk, kind, q in queries:
+            if found.get((tk, kind)):
+                continue
             cand = np.flatnonzero((block[:L] == q[0]) & (block[1 : L + 1] == q[1]) & (block[2 : L + 2] == q[2]))
             for j in cand:
                 if np.array_equal(block[j : j + k], q):
-                    found[tk] = True
+                    found[(tk, kind)] = True
                     break
-    tested = len(queries)
-    hits = sum(found.values())
-    (RUN / "data_audit/overlap_scan.json").write_text(json.dumps({"queries": tested, "tasks_with_hit": found}, indent=1))
-    card("2.2", "exact-match scan: sealed-window context tails (12 values) found in pretraining data",
-         {"tasks_with_hit": hits, "tasks": len(found)}, "0 hits (else report)", "PASS" if hits == 0 else "FAIL")
+    hits_c = sorted({tk for (tk, kd) in found if kd == "context"})
+    hits_l = sorted({tk for (tk, kd) in found if kd == "label"})
+    (RUN / "data_audit/overlap_scan.json").write_text(json.dumps(
+        {"queries": len(queries), "skipped_low_entropy": skipped, "context_hits": hits_c, "label_hits": hits_l},
+        indent=1))
+    card("2.2", f"exact-match scan: {k}-value context tails and label heads (>= {min_distinct} distinct) in pretraining",
+         {"queries": len(queries), "skipped": skipped, "context_hit_tasks": hits_c, "label_hit_tasks": hits_l},
+         "0 hits", "PASS" if not found else "FAIL")
 
 
 def gate2_causality(model) -> None:
@@ -235,9 +247,9 @@ if __name__ == "__main__":
     a = ap.parse_args()
     torch.set_grad_enabled(False)
     torch.set_num_threads(8)
-    from model_wm import load_wm
+    from model_wm2 import load_any
 
-    model = load_wm(a.ckpt, "cpu")
+    model = load_any(a.ckpt, "cpu")
     z = np.load(RUN / "harness/inputs_sim_val.npz", allow_pickle=True)
     tv = np.load(RUN / "harness/truth_sim_val.npz", allow_pickle=True)  # validation set: not sealed holdout
     x, u, y = z["x"], z["u"], tv["y"]

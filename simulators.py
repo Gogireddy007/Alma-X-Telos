@@ -16,7 +16,8 @@ from __future__ import annotations
 import numpy as np
 
 A = 2  # action channels
-TRAIN_KINDS = ("lss", "thermal", "inventory", "pricing", "fopdt")
+TRAIN_KINDS = ("lss", "thermal", "inventory", "pricing", "fopdt")  # Alma-WM (wm1)
+TRAIN_KINDS_V2 = TRAIN_KINDS + ("hammer", "logistic", "bilinear")  # Alma-WM2 adds three nonlinear families
 HELDOUT_KINDS = ("tanks",)
 
 
@@ -74,8 +75,8 @@ def seasonal(rng: np.random.Generator, T: int) -> np.ndarray:
 # ------------------------------------------------------------------------------------------------
 
 
-def sample_system(rng: np.random.Generator, kind: str | None = None) -> dict:
-    kind = kind or str(rng.choice(TRAIN_KINDS))
+def sample_system(rng: np.random.Generator, kind: str | None = None, kinds: tuple = TRAIN_KINDS) -> dict:
+    kind = kind or str(rng.choice(kinds))
     p: dict = {"kind": kind, "obs_sd": float(rng.uniform(0.01, 0.15)), "level": float(rng.normal(0, 5)),
                "scale": float(np.exp(rng.uniform(-2, 4)))}
     if kind == "lss":
@@ -99,6 +100,17 @@ def sample_system(rng: np.random.Generator, kind: str | None = None) -> dict:
         p.update(K=float(rng.normal(0, 2)), tau=float(rng.uniform(2, 200)), delay=int(rng.integers(0, 60)),
                  gain=float(rng.uniform(0.3, 2.0)), exo=float(rng.normal(0, 0.5)),
                  proc_sd=float(rng.uniform(0.01, 0.15)), ar=float(rng.uniform(0, 0.95)))
+    elif kind == "hammer":  # Hammerstein-Wiener: static input nonlinearity -> 2nd-order linear -> output map
+        r, th = float(rng.uniform(0.8, 0.99)), float(rng.uniform(0.0, 0.5))
+        p.update(a1=2 * r * np.cos(th), a2=-r * r, g=float(rng.normal(0, 1)), nl=str(rng.choice(["sat", "dead", "cube"])),
+                 out=str(rng.choice(["lin", "softplus", "tanh"])), exo=float(rng.normal(0, 0.3)),
+                 proc_sd=float(rng.uniform(0.01, 0.1)))
+    elif kind == "logistic":  # population / adoption with harvesting effort and a seasonal capacity
+        p.update(r=float(rng.uniform(0.01, 0.1)), h=float(rng.uniform(0.005, 0.05)), cap=float(rng.uniform(0.1, 0.5)),
+                 proc_sd=float(rng.uniform(0.01, 0.08)))
+    elif kind == "bilinear":  # gain-scheduled: the action's effect depends on the state
+        p.update(a=float(rng.uniform(0.8, 0.995)), b=float(rng.uniform(0.05, 0.5)), cx=float(rng.normal(0, 0.1)),
+                 d=float(rng.normal(0, 0.2)), proc_sd=float(rng.uniform(0.01, 0.1)))
     elif kind == "tanks":  # held out
         p.update(k1=float(rng.uniform(0.02, 0.15)), k2=float(rng.uniform(0.02, 0.15)),
                  gain=float(rng.uniform(0.05, 0.4)), proc_sd=float(rng.uniform(0.005, 0.05)))
@@ -115,7 +127,7 @@ def uses(p: dict) -> tuple[bool, bool]:
     k = p["kind"]
     if k == "lss":
         return True, p["uses_exo"]
-    if k in ("thermal", "pricing", "fopdt"):
+    if k in ("thermal", "pricing", "fopdt", "hammer", "logistic", "bilinear"):
         return True, True
     return True, False  # inventory, tanks
 
@@ -132,11 +144,15 @@ def default_actions(rng: np.random.Generator, p: dict, T: int) -> np.ndarray:
             u[:, 0] = np.clip(p["demand"] * (1 + 0.5 * u[:, 0]), 0, None)  # orders >= 0
         if k == "tanks":
             u[:, 0] = np.clip(1 + 0.5 * u[:, 0], 0, None)  # inflow >= 0
+        if k == "logistic":
+            u[:, 0] = np.clip(1 + 0.5 * u[:, 0], 0, None)  # harvesting effort >= 0
     if e:
         if k == "thermal":
             u[:, 1] = seasonal(rng, T) * rng.uniform(0.5, 2) + rng.normal(0, 0.3)  # outdoor temperature
         elif k == "pricing":
             u[:, 1] = (sample_actions(rng, T, "pulses") > 0).astype(float)  # promotions
+        elif k == "logistic":
+            u[:, 1] = seasonal(rng, T)  # capacity driver
         else:
             u[:, 1] = sample_actions(rng, T)
     return u
@@ -186,6 +202,30 @@ def simulate(p: dict, u: np.ndarray, nz: dict) -> np.ndarray:
             n = p["ar"] * n + e[t]
             y[t] = v + n
             v = v + (p["K"] * np.tanh(p["gain"] * ud[t]) + p["exo"] * u1[t] - v) / p["tau"]
+    elif k == "hammer":
+        f = {"sat": np.tanh, "dead": lambda z: np.sign(z) * np.maximum(np.abs(z) - 0.5, 0), "cube": lambda z: z ** 3 / 3}
+        w_in = f[p["nl"]](u0)
+        y = np.empty(T)
+        s1 = s2 = float(nz["x0"][0]) * 0.3
+        g = p["g"] * (1 - p["a1"] - p["a2"])  # unit dc gain from the nonlinear input
+        for t in range(T):
+            y[t] = s1
+            s1, s2 = p["a1"] * s1 + p["a2"] * s2 + g * w_in[t] + p["exo"] * u1[t] * (1 - p["a1"] - p["a2"]) + e[t], s1
+        y = {"lin": lambda z: z, "softplus": lambda z: np.logaddexp(0, 2 * z) / 2, "tanh": np.tanh}[p["out"]](y)
+    elif k == "logistic":
+        xp = 0.5 + 0.2 * abs(float(nz["x0"][0]))
+        y = np.empty(T)
+        for t in range(T):
+            y[t] = xp
+            kc = 1 + p["cap"] * u1[t]
+            xp = max(xp + p["r"] * xp * (1 - xp / kc) - p["h"] * u0[t] * xp + e[t] * xp, 1e-4)
+    elif k == "bilinear":
+        xs = float(nz["x0"][0])
+        y = np.empty(T)
+        for t in range(T):
+            y[t] = xs
+            xs = p["a"] * xs + (1 - p["a"]) * (p["b"] * 5 * u0[t] + p["d"] * 5 * u1[t]) + p["cx"] * xs * u0[t] * (1 - p["a"]) * 5 + e[t]
+            xs = float(np.clip(xs, -50, 50))
     elif k == "tanks":
         h1, h2 = 1.0 + 0.2 * abs(nz["x0"][0]), 1.0 + 0.2 * abs(nz["x0"][1])
         y = np.empty(T)
@@ -201,8 +241,9 @@ def simulate(p: dict, u: np.ndarray, nz: dict) -> np.ndarray:
     return y + p["obs_sd"] * p["scale"] * nz["obs"][:T]  # noise does not depend on u -> exact counterfactuals
 
 
-def episode(rng: np.random.Generator, T: int, kind: str | None = None) -> tuple[np.ndarray, np.ndarray, dict, dict]:
-    p = sample_system(rng, kind)
+def episode(rng: np.random.Generator, T: int, kind: str | None = None,
+            kinds: tuple = TRAIN_KINDS) -> tuple[np.ndarray, np.ndarray, dict, dict]:
+    p = sample_system(rng, kind, kinds)
     nz = sample_noise(rng, T)
     u = default_actions(rng, p, T)
     return simulate(p, u, nz), u, p, nz

@@ -13,7 +13,7 @@ import torch
 from torch.utils.data import IterableDataset, get_worker_info
 
 from data import PATCH, PRESCALE_N, RealStore, TrainStream, prescale
-from simulators import A, episode
+from simulators import A, TRAIN_KINDS, episode
 
 
 def prescale_actions(u: np.ndarray, um: np.ndarray, n_ref: int = PRESCALE_N) -> np.ndarray:
@@ -32,8 +32,9 @@ def prescale_actions(u: np.ndarray, um: np.ndarray, n_ref: int = PRESCALE_N) -> 
 
 
 class WMStream(IterableDataset):
-    def __init__(self, real_root: str | None, seed: int = 0, window: int = 4096, p_ctrl: float = 0.35) -> None:
-        self.real_root, self.seed, self.window, self.p_ctrl = real_root, seed, window, p_ctrl
+    def __init__(self, real_root: str | None, seed: int = 0, window: int = 4096, p_ctrl: float = 0.35,
+                 kinds: tuple = TRAIN_KINDS) -> None:
+        self.real_root, self.seed, self.window, self.p_ctrl, self.kinds = real_root, seed, window, p_ctrl, kinds
         self.base = TrainStream(real_root, seed=seed, window=window)
 
     def sample(self, rng: np.random.Generator, real: RealStore | None):
@@ -42,7 +43,7 @@ class WMStream(IterableDataset):
             x, m = self.base.sample(rng, real)
             return x, m, np.zeros((W, A), np.float32), np.zeros((W, A), bool)
         n = W - PATCH if rng.random() < 0.7 else int(rng.integers(512, W - PATCH))
-        y, u, _, _ = episode(rng, n)
+        y, u, _, _ = episode(rng, n, kinds=self.kinds)
         um = np.isfinite(u)
         if rng.random() < 0.1:  # sometimes hide an action channel: model must marginalise it
             um[:, int(rng.integers(0, A))] = False

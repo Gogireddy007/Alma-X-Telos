@@ -16,7 +16,7 @@ from common import CTX, HZ, PATCH, QS, RUN, log, seal
 from data import prescale
 from data_wm import prescale_actions
 from forecast import AlmaForecaster
-from model_wm import load_wm
+from model_wm2 import load_any
 
 DEV = "cpu"
 
@@ -34,9 +34,10 @@ def wm_rollout(model, contexts: list, H: int, u_full: np.ndarray | None = None, 
     F = nf * PATCH
     outs, states = [], []
     for s in range(0, len(contexts), bs):
-        X, M, U, UM, LS = [], [], [], [], []
+        X, M, U, UM, LS, NN = [], [], [], [], [], []
         for j, c in enumerate(contexts[s : s + bs]):
             c = np.asarray(c, np.float64)[-CTX:]
+            NN.append(bool(np.isfinite(c).any() and np.nanmin(c) >= 0))
             xs, ms = np.zeros(CTX), np.zeros(CTX, bool)
             xs[CTX - len(c):] = np.nan_to_num(c)
             ms[CTX - len(c):] = np.isfinite(c)
@@ -63,7 +64,11 @@ def wm_rollout(model, contexts: list, H: int, u_full: np.ndarray | None = None, 
         x, m, u, um = t(X), t(M, torch.bool), t(U), t(UM, torch.bool)
         q = model.forecast(x, m, u, um, nf).numpy()[:, :H]
         ls = np.array(LS)
-        outs.append(q * ls[:, 1, None, None] + ls[:, 0, None, None])
+        qd = q * ls[:, 1, None, None] + ls[:, 0, None, None]
+        if hasattr(model, "fc_base"):  # Alma-WM2 output constraint: non-negative context -> non-negative forecast
+            nn_ = np.array(NN)
+            qd[nn_] = np.maximum(qd[nn_], 0.0)
+        outs.append(qd)
         if return_state:
             h, _, _ = model.enc.encode(x, m, u[:, :CTX], um[:, :CTX])
             states.append(h[:, -1].numpy())
@@ -158,7 +163,7 @@ def run_sim(model, v2: AlmaForecaster, name: str) -> None:
             rnd[i, CTX:, 0] = r
     res["wm_random"] = wm_rollout(model, ctxs, HZ, rnd)
     res["wm_cf"] = np.stack([wm_rollout(model, ctxs, HZ, ucf[:, k]) for k in range(ucf.shape[1])], 1)
-    fc = AlmaForecaster(model.enc, DEV, context_len=CTX, symmetric=True)
+    fc = AlmaForecaster(getattr(model, "fc_base", model.enc), DEV, context_len=CTX, symmetric=True)
     res["wm_direct"] = direct(fc, ctxs, HZ)
     res["alma_v2"] = direct(v2, ctxs, HZ)
     res["persistence"] = persistence(ctxs, HZ)
@@ -194,7 +199,7 @@ def run_real(model, v2: AlmaForecaster, telos: bool = True) -> None:
     z = np.load(RUN / "harness/inputs_real.npz", allow_pickle=True)
     C, meta = list(z["contexts"]), z["meta"]
     tasks = sorted(set(m[0] for m in meta), key=lambda s: [m[0] for m in meta].index(s))
-    fc = AlmaForecaster(model.enc, DEV, context_len=CTX, symmetric=True)
+    fc = AlmaForecaster(getattr(model, "fc_base", model.enc), DEV, context_len=CTX, symmetric=True)
     tel = None
     if telos:
         from eval_gift import make_telos
@@ -234,7 +239,7 @@ if __name__ == "__main__":
     ap.add_argument("--no-telos", action="store_true")
     a = ap.parse_args()
     torch.set_num_threads(8)
-    model = load_wm(a.ckpt, DEV)
+    model = load_any(a.ckpt, DEV)
     v2 = AlmaForecaster.load("runs/alma_v2/ema_6000.pt", device=DEV, context_len=CTX, symmetric=True)
     log(f"predict: ckpt={a.ckpt} suites={a.suites}")
     from common import manifest_add

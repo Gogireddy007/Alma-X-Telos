@@ -1,0 +1,28 @@
+# Frozen before any Alma-WM result. Engine Section D defaults, adapted where marked.
+significance_t: 3.0                 # paired t on per-unit log ratios
+beats_claim: {paired_t: 3.0, holm_alpha: 0.05}   # Hansen SPA replaced by Holm (adaptation, disclosed)
+min_units: {preliminary: 12, frontier: 36}       # tasks (real) or episodes (simulated)
+noninferiority_vs_alma_v2: 0.01     # rel CRPS ratio <= 1.01
+coverage_tolerance_pp: 2.0          # nominal 80 and 60 (9-quantile model has no 95% interval)
+rollout:
+  beats_every_simple_law_each_bucket: true
+  buckets: [[1,16],[17,64],[65,256],[257,512]]
+  max_error_growth_ratio: 10.0      # CRPS(257-512) / CRPS(1-16)
+  constraint_violation_rate_max: 0.01
+  long_horizon_steps: 2048
+action:
+  aware_beats_blind_t: 3.0
+  counterfactual_beats_arx_t: 3.0
+  effect_sign_accuracy_min: 0.90    # where |true effect| > 0.5 context sd
+  monotone_sweep_rate_min: 0.95
+  real_data_causal: FAIL_NO_DATA    # 6.3-6.5 cannot be computed
+uncertainty:
+  spearman_t: 3.0
+  ood_auroc_min: 0.75
+  fallback_not_worse: true
+probes: {r2_min: 0.0, permutation_p_max: 0.01, effective_rank_min: 16}
+latent_seed_alignment_min: 0.8      # needs >= 2 seeds (not trained -> FAIL)
+planning: {beats_baselines_t: 3.0, real_vs_imagined_gain_min: 0.70}
+failure_rate_max: 0.01
+placebo_t: 3.0
+live_record_months_min: 6

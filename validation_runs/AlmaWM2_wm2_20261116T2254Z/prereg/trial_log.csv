@@ -1,0 +1,26 @@
+trial,kind,evaluated_on,notes
+quick_alma_v1_10000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v1_12000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v1_14000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v1_16000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v1_18000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v1_2000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v1_20000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v1_4000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v1_6000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v1_8000,checkpoint,gift_quick_dev,v1 selection
+quick_alma_v2_10000,checkpoint,gift_quick_dev,v2 selection
+quick_alma_v2_2000,checkpoint,gift_quick_dev,v2 selection
+quick_alma_v2_4000,checkpoint,gift_quick_dev,v2 selection
+quick_alma_v2_6000,checkpoint,gift_quick_dev,v2 selection
+quick_alma_v2_8000,checkpoint,gift_quick_dev,v2 selection
+alma_12000_full,checkpoint,gift_full_dev,
+alma_v1_final_full,checkpoint,gift_full_dev,
+alma_v2_10000_full,checkpoint,gift_full_dev,
+alma_v2_6000_full,checkpoint,gift_full_dev,chosen
+m2000_ctx_ensembles,inference_variant,gift_quick_dev,
+symmetric_avg,inference_variant,gift_quick_dev,kept
+ctx4096,inference_variant,gift_quick_dev,
+alma_wm1,wm_config,none_yet,var weight raised 0.1->1.0 after 100-step smoke run (training loss only)
+wm2_design,design,none,frozen v2 path + ARX prior + positivity + 3 new families; decided from wm1 sealed results (wm1 holdouts are now burned)
+wm2_smoke_100,smoke,training loss only,100-step smoke test; no holdout
