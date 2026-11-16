@@ -1,0 +1,20 @@
+{
+ "harness": {
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/inputs_sim_val.npz": {
+   "sha256": "63be8e318c988e4cd1312d9f24bbe63bd4f49f93989cb3a9f849bdc510fdf607",
+   "utc": "2026-11-16T18:31:59Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/truth_sim_val.npz": {
+   "sha256": "e47307f40ecf7919addd4bcb9102334ae3a0b1abd93e9c4e6aa2c4e71d298ddf",
+   "utc": "2026-11-16T18:31:59Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/inputs_sim_test.npz": {
+   "sha256": "b6b925f67469b0734d00f428e515be611c1e68dd2ddb37b1978a58c718854ca4",
+   "utc": "2026-11-16T18:33:21Z"
+  },
+  "validation_runs/AlmaWM_wm1_20261116T1828Z/harness/truth_sim_test.npz": {
+   "sha256": "3086f257d0ac0913fe21d51ac1775bc30d96aa85956003ac3aa43a0b5b9e1460",
+   "utc": "2026-11-16T18:33:22Z"
+  }
+ }
+}
