@@ -31,3 +31,12 @@ Written and hashed before any v3 checkpoint exists.
 - Beat Telos-Small on the sealed set with a Holm-corrected t ≥ 3.
 - Beat Alma v2 the same way.
 - Full GIFT-Eval CRPS skill > 38.76% (v2) and > 38.33% (Telos-Small).
+
+## Amendment V3-A1 (2026-11-17T15:44:09Z, before any v3 training step or any sealed output)
+Two engineering fixes were found when the first launch crashed. No evaluation, threshold, holdout or selection rule changed.
+1. **Memory:** a batch of 32 at 8k context exceeded 16 GB of unified memory (MPS out-of-memory). Fix: gradient
+   accumulation in chunks of 8 (`--micro-bs 8`). The effective batch is still 32.
+2. **Coarse-path initialisation:** zero-output init of the stride-32 embedding put coarse tokens at RMSNorm's
+   singular point, which overflowed gradients on 8k batches. Fix: initialise it as the grown fine embedding applied
+   to the pair-averaged patch. Contexts up to 4k still equal v2 to within 9e-6. 8k-batch gradient norm 0.10.
+Three crashed attempts produced no checkpoints. v3 training restarts from step 0.

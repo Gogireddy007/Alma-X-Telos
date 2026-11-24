@@ -6,7 +6,9 @@ using only its first PRESCALE_N observed points (so no future information enters
 
 from __future__ import annotations
 
+import fnmatch
 import json
+import os
 import math
 from pathlib import Path
 
@@ -146,32 +148,127 @@ def structural_synth(n: int, rng: np.random.Generator) -> np.ndarray:
     return x
 
 
+def ets_synth(n: int, rng: np.random.Generator) -> np.ndarray:
+    """Short low-frequency series from an ETS-style state-space model (yearly/quarterly/monthly-like).
+
+    Level + (damped) trend + optional additive/multiplicative season of period 4 or 12, with
+    error-driven state updates, occasional level shifts and a positive, multiplicative variant.
+    """
+    m = int(rng.choice([1, 1, 4, 12, 12]))
+    a = rng.uniform(0.05, 0.9)                      # level smoothing
+    b = rng.uniform(0.0, 0.3) * a                   # trend smoothing
+    g = rng.uniform(0.0, 0.3) * (1 - a)             # season smoothing
+    phi = 1.0 if rng.random() < 0.4 else rng.uniform(0.8, 0.99)
+    sig = rng.lognormal(np.log(0.03), 0.8)          # relative noise
+    lvl = 1.0
+    tr = rng.normal(0.02, 0.05) if rng.random() < 0.85 else 0.0
+    mult = rng.random() < 0.5
+    s = np.zeros(max(m, 1))
+    if m > 1:
+        s = rng.normal(0, rng.uniform(0.02, 0.3), m)
+        s -= s.mean()
+    burn = int(rng.integers(0, 20))
+    out = np.empty(n + burn)
+    for t in range(n + burn):
+        si = s[t % m] if m > 1 else 0.0
+        e = rng.standard_t(5) * sig if rng.random() < 0.3 else rng.standard_normal() * sig
+        base = lvl + phi * tr
+        y = base * (1 + si) * (1 + e) if mult else base + si + e
+        out[t] = y
+        lvl = base + a * (base * e if mult else e)
+        tr = phi * tr + b * (base * e if mult else e)
+        if m > 1:
+            s[t % m] = si + g * e
+        if rng.random() < 0.01:
+            lvl += rng.normal(0, 0.1) * abs(lvl)
+    x = out[burn:]
+    if rng.random() < 0.5:
+        x = x * rng.lognormal(3, 2)
+    if rng.random() < 0.1:
+        x = np.round(x)
+    return x
+
+
 # ------------------------------------------------------------------------------------------------
 # Real data
 # ------------------------------------------------------------------------------------------------
 
 
+def freq_bucket(f: str | None) -> str:
+    f = (f or "").upper()
+    if f.startswith(("A", "Y")):
+        return "yearly"
+    if f.startswith("Q"):
+        return "quarterly"
+    if f.startswith("M") and not f.startswith("MIN"):
+        return "monthly"
+    if f.startswith("W"):
+        return "weekly"
+    if f.startswith("D"):
+        return "daily"
+    if f.startswith("H") or f.endswith("H"):
+        return "hourly"
+    return "subhourly"
+
+
 class RealStore:
-    def __init__(self, root: str) -> None:
-        r = Path(root)
-        self.values = np.memmap(r / "values.f32", dtype=np.float32, mode="r")
-        self.index = np.load(r / "index.npy")
-        meta = json.load(open(r / "meta.json"))
-        self.sources = meta["sources"]
+    """sampler='sqrt': source p ~ sqrt(points) (v1-v3 behaviour).
+    sampler='bucket': frequency bucket p ~ (series in bucket)^alpha, then source p ~ sqrt(points) inside it.
+    This lifts yearly/quarterly/monthly series from ~1% to ~12% of real samples (alpha=0.5)."""
+
+    def __init__(self, root: str, sampler: str = "sqrt", alpha: float = 0.5) -> None:
+        # root may be "a,b,...": stores are merged by source name (same source in two stores = one source)
+        self.vals, idx, self.sources, stats = [], [], [], {}
+        for k, r in enumerate(Path(x) for x in root.split(",")):
+            self.vals.append(np.memmap(r / "values.f32", dtype=np.float32, mode="r"))
+            ix = np.load(r / "index.npy").reshape(-1, 3)
+            meta = json.load(open(r / "meta.json"))
+            remap = []
+            for s in meta["sources"]:
+                if s not in self.sources:
+                    self.sources.append(s)
+                remap.append(self.sources.index(s))
+                st = meta["stats"].get(s)
+                if st and (s not in stats or not stats[s].get("freq")):
+                    stats[s] = st
+            remap = np.asarray(remap, dtype=np.int64)
+            idx.append(np.column_stack([ix[:, 0], ix[:, 1], remap[ix[:, 2]] if len(ix) else ix[:, 2],
+                                        np.full(len(ix), k, dtype=np.int64)]))
+        self.index = np.concatenate(idx)
+        meta = {"stats": stats}
         sid = self.index[:, 2]
         self.by_src = [np.where(sid == s)[0] for s in range(len(self.sources))]
         pts = np.array([self.index[ix, 1].sum() if len(ix) else 0 for ix in self.by_src], dtype=np.float64)
         w = np.sqrt(pts)
+        if sampler == "bucket":
+            stats = meta["stats"]
+            bk = [freq_bucket(stats[s]["freq"]) if s in stats else "subhourly" for s in self.sources]
+            n_ser = np.array([len(ix) for ix in self.by_src], dtype=np.float64)
+            tot = {}
+            for b, n in zip(bk, n_ser):
+                tot[b] = tot.get(b, 0.0) + n
+            bw = {b: v**alpha for b, v in tot.items() if v > 0}
+            z = sum(bw.values())
+            inb = {b: sum(wi for wi, bi in zip(w, bk) if bi == b) for b in bw}
+            w = np.array([bw[b] / z * wi / inb[b] if b in bw and inb[b] > 0 else 0.0 for wi, b in zip(w, bk)])
+            self.bucket_p = {b: bw[b] / z for b in bw}
+        boost = os.environ.get("ALMA_BOOST", "")  # e.g. "PEMS*,LOS_LOOP:4;alibaba*:3" multiplies source weights
+        for grp in filter(None, boost.split(";")):
+            pats, f = grp.rsplit(":", 1)
+            for j, src in enumerate(self.sources):
+                if any(fnmatch.fnmatch(src, q) for q in pats.split(",")):
+                    w[j] *= float(f)
         self.src_p = w / w.sum()
 
     def sample(self, rng: np.random.Generator, n: int) -> np.ndarray:
         s = rng.choice(len(self.src_p), p=self.src_p)
         i = self.by_src[s][rng.integers(len(self.by_src[s]))]
-        off, ln, _ = self.index[i]
+        off, ln, _, k = self.index[i]
+        v = self.vals[k]
         if ln > n:
             st = int(rng.integers(0, ln - n + 1))
-            return np.asarray(self.values[off + st : off + st + n], dtype=np.float64)
-        return np.asarray(self.values[off : off + ln], dtype=np.float64)
+            return np.asarray(v[off + st : off + st + n], dtype=np.float64)
+        return np.asarray(v[off : off + ln], dtype=np.float64)
 
 
 # ------------------------------------------------------------------------------------------------
@@ -210,11 +307,14 @@ def prescale(x: np.ndarray, m: np.ndarray, n_ref: int = PRESCALE_N) -> tuple[np.
 
 class TrainStream(IterableDataset):
     def __init__(self, real_root: str | None, seed: int = 0, p_real: float = 0.55, p_mix: float = 0.15,
-                 window: int = WINDOW) -> None:
+                 window: int = WINDOW, sampler: str = "sqrt", alpha: float = 0.5, p_short: float = 0.0) -> None:
         self.real_root, self.seed, self.p_real, self.p_mix = real_root, seed, p_real, p_mix
-        self.window = window
+        self.p_short = p_short
+        self.window, self.sampler, self.alpha = window, sampler, alpha
 
     def _raw(self, rng: np.random.Generator, real: RealStore | None) -> np.ndarray:
+        if self.p_short > 0 and rng.random() < self.p_short:
+            return ets_synth(int(np.exp(rng.uniform(np.log(12), np.log(320)))), rng)
         u = rng.random()
         if real is not None and u < self.p_real:
             x = real.sample(rng, self.window * 4 if rng.random() < 0.2 else self.window)
@@ -252,7 +352,8 @@ class TrainStream(IterableDataset):
         wi = get_worker_info()
         wid = wi.id if wi is not None else 0
         rng = np.random.default_rng([self.seed, wid, int(torch.initial_seed()) % (2**31)])
-        real = RealStore(self.real_root) if self.real_root and Path(self.real_root, "index.npy").exists() else None
+        real = (RealStore(self.real_root, self.sampler, self.alpha)
+                if self.real_root and all(Path(r, "index.npy").exists() for r in self.real_root.split(",")) else None)
         while True:
             x, m = self.sample(rng, real)
             yield torch.from_numpy(x), torch.from_numpy(m)

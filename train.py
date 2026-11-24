@@ -62,8 +62,14 @@ def main() -> None:
     ap.add_argument("--save-every", type=int, default=1000)
     ap.add_argument("--resume", default=None)
     ap.add_argument("--init-from", default=None, help="warm-start weights (EMA) from a checkpoint; horizon may grow")
+    ap.add_argument("--sampler", default="sqrt", choices=["sqrt", "bucket"])
+    ap.add_argument("--alpha", type=float, default=0.5)
+    ap.add_argument("--loss-norm", default="token", choices=["token", "series", "mix"])
+    ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--p-short", type=float, default=0.0, help="share of short ETS-style synthetic series")
     ap.add_argument("--device", default="mps" if torch.backends.mps.is_available() else "cpu")
     args = ap.parse_args()
+    torch.manual_seed(args.seed)
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -127,7 +133,8 @@ def main() -> None:
         pr = (s - args.warmup) / max(1, args.steps - args.warmup)
         return 1e-2 * args.lr + (args.lr - 1e-2 * args.lr) * 0.5 * (1 + math.cos(math.pi * min(1.0, pr)))
 
-    dl = DataLoader(TrainStream(args.real, seed=step + 17, window=args.window), batch_size=args.bs, num_workers=args.workers,
+    dl = DataLoader(TrainStream(args.real, seed=step + 17 + 1000 * args.seed, window=args.window,
+                                sampler=args.sampler, alpha=args.alpha, p_short=args.p_short), batch_size=args.bs, num_workers=args.workers,
                     persistent_workers=args.workers > 0, prefetch_factor=4 if args.workers > 0 else None)
     hz, N = cfg.horizon, args.window // PATCH
     log = open(out / "log.jsonl", "a")
@@ -143,7 +150,7 @@ def main() -> None:
         for g in opt.param_groups:
             g["lr"] = lr_at(step)
         q, mu, sd = model(x, m)
-        loss = quantile_loss(q, mu, sd, y, ym, cfg.quantiles, cfg.asinh_clip)
+        loss = quantile_loss(q, mu, sd, y, ym, cfg.quantiles, cfg.asinh_clip, args.loss_norm)
         opt.zero_grad(set_to_none=True)
         loss.backward()
         gn = torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)

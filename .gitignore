@@ -1,9 +1,14 @@
 .venv/
 data/
-runs/
 __pycache__/
+.DS_Store
+.env
 *.pt
 *.npz
+*.f32
+*.npy
+*.arrow
+runs/**/last*
 validation_runs/*/sealed_outputs/
 validation_runs/*/rollouts/
 validation_runs/DEBUG_harness/

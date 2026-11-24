@@ -1,0 +1,20 @@
+--- H_boost real=data/pretrain,data/pretrain2 alpha=0.5 seed=0 boost=PEMS*,LOS_LOOP,Q-TRAFFIC,traffic_hourly,*METRO,BEIJING_SUBWAY_30MIN:3;alibaba*,azure*,borg*:3 Fri Nov 20 01:56:06 PST 2026
+train exit 0 Fri Nov 20 02:59:43 PST 2026
+dev2 H_boost exit 0 Fri Nov 20 03:01:24 PST 2026
+    all sealed28      t   win   n  file   (ref results/preds/telos.json)
+ 0.9842   1.0194  -0.93  0.39  97  results/preds/D.json
+ 0.9854   1.0210  -0.86  0.39  97  results/preds/H_boost.json
+--- H_seed real=data/pretrain alpha=0.5 seed=1 boost= Fri Nov 20 03:01:24 PST 2026
+train exit 0 Fri Nov 20 04:04:20 PST 2026
+dev2 H_seed exit 0 Fri Nov 20 04:06:00 PST 2026
+    all sealed28      t   win   n  file   (ref results/preds/telos.json)
+ 0.9842   1.0194  -0.93  0.39  97  results/preds/D.json
+ 0.9866   1.0207  -0.80  0.36  97  results/preds/H_seed.json
+--- H_boost5 real=data/pretrain,data/pretrain2 alpha=0.5 seed=0 boost=PEMS*,LOS_LOOP,Q-TRAFFIC,traffic_hourly,*METRO,BEIJING_SUBWAY_30MIN:5;alibaba*,azure*,borg*:5 Fri Nov 20 04:06:00 PST 2026
+train exit 0 Fri Nov 20 09:13:14 PST 2026
+dev2 H_boost5 exit 0 Fri Nov 20 09:14:58 PST 2026
+    all sealed28      t   win   n  file   (ref results/preds/telos.json)
+ 0.9842   1.0194  -0.93  0.39  97  results/preds/D.json
+ 0.9895   1.0240  -0.62  0.40  97  results/preds/H_boost5.json
+--- H_a03 real=data/pretrain,data/pretrain2 alpha=0.3 seed=0 boost=PEMS*,LOS_LOOP,Q-TRAFFIC,traffic_hourly,*METRO,BEIJING_SUBWAY_30MIN:3;alibaba*,azure*,borg*:3 Fri Nov 20 09:14:58 PST 2026
+=== PAUSED by user Fri Nov 20 09:29:05 PST 2026: H_boost5 trained (ema_3000), dev2 not run; H_a03 and Stage G not started

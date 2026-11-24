@@ -1,0 +1,43 @@
+{
+ "args": {
+  "out": "runs/meridian_s",
+  "steps": 20000,
+  "bs": 64,
+  "lr": 0.001,
+  "warmup": 1000,
+  "wd": 0.05,
+  "ema": 0.999,
+  "layers": 8,
+  "d": 384,
+  "workers": 6,
+  "real": "data/pretrain",
+  "eval_every": 2000,
+  "save_every": 1000,
+  "resume": null,
+  "device": "mps"
+ },
+ "config": {
+  "patch": 16,
+  "horizon": 512,
+  "d_model": 384,
+  "n_layers": 8,
+  "n_heads": 6,
+  "ff_dim": 1024,
+  "head_hidden": 1024,
+  "quantiles": [
+   0.1,
+   0.2,
+   0.3,
+   0.4,
+   0.5,
+   0.6,
+   0.7,
+   0.8,
+   0.9
+  ],
+  "min_scale": 0.001,
+  "asinh_clip": 8.0,
+  "rope_theta": 10000.0
+ },
+ "params": 21391616
+}

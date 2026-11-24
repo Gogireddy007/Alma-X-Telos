@@ -40,5 +40,40 @@
    "sha256": "f03d8a8b368b38ae1079fad25836e751d99218ac47c67c9bfe790385c7130cb0",
    "utc": "2026-11-16T22:59:03Z"
   }
+ },
+ "weights": {
+  "runs/alma_wm2/ema_28000.pt": {
+   "sha256": "96be96607071287ac4d45ca6079fa2491e36389f083163b5f96d99892ca25978",
+   "utc": "2026-11-17T15:06:10Z"
+  }
+ },
+ "sealed": {
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/sealed_outputs/pred_sim_val.npz": {
+   "sha256": "51451a80331d9720f41c5121a3b841d50553ebd1fac4a41a751c45a452f96a9f",
+   "utc": "2026-11-17T15:06:37Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/sealed_outputs/pred_sim_test.npz": {
+   "sha256": "488bf3c0be5213276f415d6a51f959eb5e23b206d84887f4282efdf59d8aceb4",
+   "utc": "2026-11-17T15:08:07Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/sealed_outputs/pred_sim_tanks.npz": {
+   "sha256": "a0ce07b64de2d9fcd15c37d87e8c2325f41c0bce9b2e19034b2915b55cac6a36",
+   "utc": "2026-11-17T15:08:29Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/sealed_outputs/pred_plan_test.npz": {
+   "sha256": "d58c12921b681df568a01df1dc5c6404ea19b321d2c8b0a7ef1566654b3c3dfd",
+   "utc": "2026-11-17T15:08:50Z"
+  },
+  "validation_runs/AlmaWM2_wm2_20261116T2254Z/sealed_outputs/pred_real.npz": {
+   "sha256": "2e52e86901b0525a5a09e326ebcc699f7f6acbebf25de357483ef3a0fa3d2256",
+   "utc": "2026-11-17T15:14:33Z"
+  }
+ },
+ "truth_loaded": {
+  "real": "2026-11-17T15:17:25Z",
+  "sim_test": "2026-11-17T15:17:04Z",
+  "sim_val": "2026-11-17T15:17:13Z",
+  "sim_tanks": "2026-11-17T15:17:14Z",
+  "plan_test": "2026-11-17T15:17:24Z"
  }
 }

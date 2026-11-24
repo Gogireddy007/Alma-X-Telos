@@ -1,0 +1,2 @@
+v3_design,design,gift_quick_dev,12x384 depth-grown from v2@6k (function-preserving: quick_rel_crps 0.60693 at step 3 = v2); 20k steps queued after wm2; selection on quick-dev only
+v3_fix_oom_init,2026-11-17T15:44:09Z,pre-training engineering fixes (grad accumulation; coarse embed init); no eval change

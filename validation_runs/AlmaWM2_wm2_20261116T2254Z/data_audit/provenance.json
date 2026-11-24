@@ -1,0 +1,19 @@
+{
+ "dataset": "Salesforce/GiftEvalPretrain (HF)",
+ "files": "data-*.arrow, packed to data/pretrain",
+ "n_sources": 94,
+ "total_points": 1201263616,
+ "sha256_index": "bbd503a612d6b82481435f3a27a39fae5e64a12468c3f8d5754db2ada012e6d4",
+ "sha256_meta": "aa4c7b7c382f11114c838828fe9ce5005e4f0fed9ded92471fb6bdc268ab3f93",
+ "licence": {
+  "GiftEvalPretrain": {
+   "licence": "apache-2.0",
+   "card_sha256": "0a62c3bcab467c8f31ea790b03029d9e5ec6df20d2cb1a49f7e6e7a84bf4d04d"
+  },
+  "GiftEval": {
+   "licence": "apache-2.0",
+   "card_sha256": "4a88f7313563edf75f2b868c5c03b3b7c77642cf60af92f796026c3cdf6a31f2"
+  }
+ },
+ "note": "licence as declared on the HF dataset cards; underlying source datasets may carry own terms"
+}

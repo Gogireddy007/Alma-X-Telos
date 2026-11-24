@@ -1,0 +1,64 @@
+{
+ "args": {
+  "out": "runs/alma_wm2",
+  "init_from": "runs/alma_wm1/ema_8000.pt",
+  "base": "runs/alma_v2/ema_6000.pt",
+  "steps": 28000,
+  "bs": 32,
+  "lr": 0.0003,
+  "warmup": 300,
+  "wd": 0.05,
+  "ema": 0.999,
+  "target_ema": 0.998,
+  "window": 4096,
+  "p_ctrl": 0.5,
+  "workers": 6,
+  "real": "data/pretrain",
+  "save_every": 2000,
+  "seed": 0,
+  "resume": false,
+  "device": "mps"
+ },
+ "config": {
+  "base": {
+   "patch": 16,
+   "horizon": 1024,
+   "d_model": 384,
+   "n_layers": 8,
+   "n_heads": 6,
+   "ff_dim": 1024,
+   "head_hidden": 1024,
+   "quantiles": [
+    0.1,
+    0.2,
+    0.3,
+    0.4,
+    0.5,
+    0.6,
+    0.7,
+    0.8,
+    0.9
+   ],
+   "min_scale": 0.001,
+   "asinh_clip": 8.0,
+   "rope_theta": 10000.0
+  },
+  "wm": {
+   "pred_layers": 4,
+   "K": 8,
+   "chain": 2,
+   "dec_hidden": 768,
+   "n_origins": 8,
+   "act_clip": 6.0,
+   "arx_p": 24,
+   "arx_q": 24,
+   "arx_fit": 768,
+   "arx_ridge": 0.01,
+   "gate_bias": -6.0
+  },
+  "version": 2
+ },
+ "params": 64359360,
+ "trainable": 36470464,
+ "init_from": "runs/alma_wm1/ema_8000.pt"
+}

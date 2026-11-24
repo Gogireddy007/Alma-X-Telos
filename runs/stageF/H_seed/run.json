@@ -1,0 +1,51 @@
+{
+ "args": {
+  "out": "runs/stageF/H_seed",
+  "steps": 3000,
+  "bs": 32,
+  "lr": 0.0001,
+  "warmup": 200,
+  "wd": 0.05,
+  "ema": 0.999,
+  "layers": 8,
+  "d": 384,
+  "window": 4096,
+  "horizon": 1024,
+  "workers": 6,
+  "real": "data/pretrain",
+  "eval_every": 1000,
+  "save_every": 1000,
+  "resume": null,
+  "init_from": "runs/alma_v2/ema_6000.pt",
+  "sampler": "bucket",
+  "alpha": 0.5,
+  "loss_norm": "mix",
+  "seed": 1,
+  "p_short": 0.0,
+  "device": "mps"
+ },
+ "config": {
+  "patch": 16,
+  "horizon": 1024,
+  "d_model": 384,
+  "n_layers": 8,
+  "n_heads": 6,
+  "ff_dim": 1024,
+  "head_hidden": 1024,
+  "quantiles": [
+   0.1,
+   0.2,
+   0.3,
+   0.4,
+   0.5,
+   0.6,
+   0.7,
+   0.8,
+   0.9
+  ],
+  "min_scale": 0.001,
+  "asinh_clip": 8.0,
+  "rope_theta": 10000.0
+ },
+ "params": 27888896
+}

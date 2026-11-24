@@ -1,0 +1,14 @@
+=== Stage A start Wed Nov 18 12:03:20 PST 2026
+--- A_control sampler=sqrt loss=token Wed Nov 18 12:03:20 PST 2026
+train exit 0 Wed Nov 18 13:06:12 PST 2026
+dev2 exit 0 Wed Nov 18 13:07:49 PST 2026
+--- B_bucket sampler=bucket loss=token Wed Nov 18 13:07:49 PST 2026
+train exit 0 Wed Nov 18 14:12:05 PST 2026
+dev2 exit 0 Wed Nov 18 14:13:49 PST 2026
+--- C_bucket_series sampler=bucket loss=series Wed Nov 18 14:13:49 PST 2026
+train exit 0 Wed Nov 18 15:16:27 PST 2026
+dev2 exit 0 Wed Nov 18 15:17:59 PST 2026
+--- D_bucket_mix sampler=bucket loss=mix Wed Nov 18 15:17:59 PST 2026
+train exit 0 Wed Nov 18 16:20:16 PST 2026
+dev2 exit 0 Wed Nov 18 16:21:49 PST 2026
+=== Stage A done Wed Nov 18 16:21:49 PST 2026

@@ -37,3 +37,22 @@ These operational definitions were left open in preregistration.md.
 
 ## A2 (wm2, before sealing)
 See preregistration.md §Amendment A2: the 2.2 overlap scan gets an entropy floor and a label scan, 5.6 adds logistic to the non-negative families, and 4.2 non-inferiority is reported as by-construction.
+
+## A3 (wm2, 2026-11-16 17:45 PST, before sealing; based on development data only)
+**Gate 5.6 is mis-specified, so its result will not count toward any claim tier.**
+- On the DEBUG harness (development data, not a sealed holdout), the *ground truth* itself is below
+  zero 4.9% of the time for inventory and 20.3% for pricing. The simulators observe deviations with
+  noise, so these series are not physically non-negative.
+- Rates at the step-4,000 checkpoint, below zero:
+
+  | | wm2 | ARX | v2 | Truth |
+  |---|---|---|---|---|
+  | inventory | 8.6% | 8.4% | 6.5% | 4.9% |
+  | pricing | 19.8% | 20.2% | 21.2% | 20.3% |
+
+  The `<= 0.01` threshold cannot be met by a perfect model.
+- **Action:** the grading code and threshold stay unchanged. 5.6 is still computed and printed in the
+  sealed report, and the truth's own rate is reported next to it. It counts as **not passed**
+  (uninformative) for the claim table and cannot help any tier.
+- **Next round (wm3):** replace it with a test against families whose latent state is truly bounded,
+  defined before any data is drawn.

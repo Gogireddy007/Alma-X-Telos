@@ -1,0 +1,12 @@
+Alma-WM2 params=64.36M trainable=36.47M device=mps
+/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/alma/train_wm2.py:131: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /Users/runner/work/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:821.)
+  acc[k] = acc.get(k, 0.0) + float(v)
+{"step": 50, "total": 0.60268, "direct": 0.22265, "ground": 0.16112, "teacher": 0.07131, "jepa": 0.17932, "var": 0.00394, "z_std": 0.67729, "prior_mae": 0.51043, "gnorm": 0.6379, "lr": 5.1e-05, "seq_s": 16.94}
+{"step": 100, "total": 0.61174, "direct": 0.22858, "ground": 0.16323, "teacher": 0.0712, "jepa": 0.18048, "var": 0.00385, "z_std": 0.6878, "prior_mae": 0.50734, "gnorm": 0.4387, "lr": 0.00010099999999999999, "seq_s": 17.11}
+{"step": 150, "total": 0.61338, "direct": 0.2276, "ground": 0.16172, "teacher": 0.07154, "jepa": 0.18321, "var": 0.00509, "z_std": 0.68267, "prior_mae": 0.51061, "gnorm": 0.4931, "lr": 0.00015099999999999998, "seq_s": 17.81}
+{"step": 200, "total": 0.61926, "direct": 0.2245, "ground": 0.1663, "teacher": 0.07098, "jepa": 0.18751, "var": 0.00546, "z_std": 0.6787, "prior_mae": 0.50764, "gnorm": 0.4032, "lr": 0.00020099999999999998, "seq_s": 17.38}
+{"step": 250, "total": 0.62438, "direct": 0.22552, "ground": 0.1653, "teacher": 0.07326, "jepa": 0.19131, "var": 0.00562, "z_std": 0.68688, "prior_mae": 0.51262, "gnorm": 0.4373, "lr": 0.000251, "seq_s": 15.56}
+{"step": 300, "total": 0.63733, "direct": 0.22663, "ground": 0.16787, "teacher": 0.07456, "jepa": 0.19966, "var": 0.00589, "z_std": 0.68641, "prior_mae": 0.52154, "gnorm": 0.4057, "lr": 0.0003, "seq_s": 14.58}
+/Users/yugandharreddygogireddy/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 26 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

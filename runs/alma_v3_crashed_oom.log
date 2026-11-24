@@ -1,0 +1,50 @@
+=== attempt 1 Tue Nov 17 07:18:33 PST 2026 
+Alma v3 params=61.80M (+JEPA head 7.65M) device=mps start=0
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Insufficient Memory (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory)
+	<AGXG16GFamilyCommandBuffer: 0xc806c4380>
+    label = <none> 
+    device = <AGXG16GDevice: 0xc8dcfc000>
+        name = Apple M4 
+    commandQueue = <AGXG16GFamilyCommandQueue: 0x1043d2740>
+        label = <none> 
+        device = <AGXG16GDevice: 0xc8dcfc000>
+            name = Apple M4 
+    retainedReferences = 1
+Traceback (most recent call last):
+  File "/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/alma/train_v3.py", line 174, in <module>
+    main()
+  File "/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/alma/train_v3.py", line 149, in main
+    acc[k] = acc.get(k, 0.0) + float(v.detach())
+                               ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: MPS command buffer execution failed: Insufficient Memory (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory). This error may have been asynchronously reported, so the stack trace below might be incorrect.
+=== attempt 2 Tue Nov 17 07:19:33 PST 2026 
+Alma v3 params=61.80M (+JEPA head 7.65M) device=mps start=0
+Error: command buffer exited with error status.
+	The Metal Performance Shaders operations encoded on it may not have completed.
+	Error: 
+	(null)
+	Insufficient Memory (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory)
+	<AGXG16GFamilyCommandBuffer: 0xa360b5180>
+    label = <none> 
+    device = <AGXG16GDevice: 0xa43c20000>
+        name = Apple M4 
+    commandQueue = <AGXG16GFamilyCommandQueue: 0x101232680>
+        label = <none> 
+        device = <AGXG16GDevice: 0xa43c20000>
+            name = Apple M4 
+    retainedReferences = 1
+Traceback (most recent call last):
+  File "/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/alma/train_v3.py", line 174, in <module>
+    main()
+  File "/Users/yugandharreddygogireddy/Library/Application Support/Claude/scratch-workspaces/b6245ab1-427b-4ac0-a743-2c73eab13273/57577617-64fe-494e-94b6-21a2cebcef3e/scratch-2026-11-16-9c6f45/alma/train_v3.py", line 149, in main
+    acc[k] = acc.get(k, 0.0) + float(v.detach())
+                               ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: MPS command buffer execution failed: Insufficient Memory (00000008:kIOGPUCommandBufferCallbackErrorOutOfMemory). This error may have been asynchronously reported, so the stack trace below might be incorrect.
+=== attempt 3 Tue Nov 17 07:20:32 PST 2026 
+Alma v3 params=61.80M (+JEPA head 7.65M) device=mps start=0
+/Users/yugandharreddygogireddy/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 26 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

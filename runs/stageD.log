@@ -1,0 +1,10 @@
+=== Stage D start Thu Nov 19 13:06:00 PST 2026 corpus2: done: 332411 series, 1,515,892,045 points, 11 sources (finalised manually after a close/flush ordering bug; data verified)
+--- D1 F_new sampler=sqrt loss=token Thu Nov 19 13:06:00 PST 2026
+train exit 0 Thu Nov 19 14:09:55 PST 2026
+dev2 results/dev2/stageD_F_new_n256.json exit 0 Thu Nov 19 14:11:38 PST 2026
+--- D1 G_new sampler=bucket loss=mix Thu Nov 19 14:11:38 PST 2026
+train exit 0 Thu Nov 19 15:15:15 PST 2026
+dev2 results/dev2/stageD_G_new_n256.json exit 0 Thu Nov 19 15:16:53 PST 2026
+D1 decision: sqrt token 1.0012 F=1.0012 G=1.0028 Thu Nov 19 15:16:53 PST 2026
+D2 skipped: new data did not help the small model (ratio 1.0012)
+=== Stage D done Thu Nov 19 15:16:53 PST 2026

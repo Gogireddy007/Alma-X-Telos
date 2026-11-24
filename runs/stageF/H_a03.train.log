@@ -1,0 +1,17 @@
+warm-started from runs/alma_v2/ema_6000.pt (horizon 1024 -> 1024)
+params=27.89M device=mps start_step=0
+{"step": 50, "loss": 0.23525502771139145, "gnorm": 0.04634198173880577, "lr": 2.5500000000000003e-05, "seq_s": 23.79584691368687, "elapsed_h": null}
+{"step": 100, "loss": 0.22670900642871858, "gnorm": 0.03963024541735649, "lr": 5.050000000000001e-05, "seq_s": 25.18743743451545, "elapsed_h": null}
+{"step": 150, "loss": 0.23306031823158263, "gnorm": 0.1357090324163437, "lr": 7.55e-05, "seq_s": 25.5877588834617, "elapsed_h": null}
+{"step": 200, "loss": 0.22887721866369248, "gnorm": 0.03998085856437683, "lr": 0.0001, "seq_s": 25.635639684423484, "elapsed_h": null}
+{"step": 250, "loss": 0.23504805833101272, "gnorm": 0.036072131246328354, "lr": 9.992212734338193e-05, "seq_s": 25.71654210985294, "elapsed_h": null}
+{"step": 300, "loss": 0.23186370342969895, "gnorm": 0.04593103379011154, "lr": 9.968875438971552e-05, "seq_s": 25.72931378954074, "elapsed_h": null}
+{"step": 350, "loss": 0.23577541649341582, "gnorm": 0.04450202360749245, "lr": 9.930061541665267e-05, "seq_s": 25.66389442710055, "elapsed_h": null}
+{"step": 400, "loss": 0.23187793642282487, "gnorm": 0.03952297940850258, "lr": 9.875893165300026e-05, "seq_s": 25.00284877467816, "elapsed_h": null}
+{"step": 450, "loss": 0.23065315395593644, "gnorm": 0.0569007471203804, "lr": 9.806540743628244e-05, "seq_s": 25.48699353840417, "elapsed_h": null}
+{"step": 500, "loss": 0.2308172255754471, "gnorm": 0.07392179220914841, "lr": 9.722222485026419e-05, "seq_s": 25.87653104388183, "elapsed_h": null}
+{"step": 550, "loss": 0.2295604568719864, "gnorm": 0.05744771659374237, "lr": 9.623203685930869e-05, "seq_s": 26.038344985175858, "elapsed_h": null}
+{"step": 600, "loss": 0.23474059283733367, "gnorm": 0.059376731514930725, "lr": 9.509795896116975e-05, "seq_s": 25.018160841626816, "elapsed_h": null}
+{"step": 650, "loss": 0.2327095603942871, "gnorm": 0.04779781401157379, "lr": 9.382355938448331e-05, "seq_s": 25.072754811685442, "elapsed_h": null}
+/Users/yugandharreddygogireddy/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 26 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

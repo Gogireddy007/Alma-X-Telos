@@ -1,0 +1,208 @@
+{
+ "n_tasks": 28,
+ "n_windows": 8300,
+ "crps_skill_pct": {
+  "alma_v3": 35.62639608184304,
+  "alma_v2": 35.56068180688874,
+  "telos": 37.87247232871661,
+  "snaive": 0.0
+ },
+ "mase_skill_pct": {
+  "alma_v3": 15.645766280273731,
+  "alma_v2": 15.708564199083542,
+  "telos": 19.936682768214318,
+  "snaive": 0.0
+ },
+ "v3_vs": {
+  "telos": {
+   "n": 28,
+   "gmean_ratio": 1.0361526738800482,
+   "t": -2.35448315034543,
+   "ci95_ratio": [
+    1.0073870314988023,
+    1.0676281439527675
+   ],
+   "win_rate": 0.2857142857142857,
+   "p": 0.9869624825446258,
+   "holm_pass": false
+  },
+  "alma_v2": {
+   "n": 28,
+   "gmean_ratio": 0.9989802146143544,
+   "t": 0.10089014547864822,
+   "ci95_ratio": [
+    0.978764352915906,
+    1.0187382409359935
+   ],
+   "win_rate": 0.6071428571428571,
+   "p": 0.4601915695173416,
+   "holm_pass": false
+  },
+  "snaive": {
+   "n": 28,
+   "gmean_ratio": 0.6437360391815696,
+   "t": 12.095822448792187,
+   "ci95_ratio": [
+    0.5984540312987419,
+    0.692698845517214
+   ],
+   "win_rate": 1.0,
+   "p": 1.0341587511815718e-12,
+   "holm_pass": true
+  }
+ },
+ "v3_vs_mase": {
+  "telos": {
+   "n": 28,
+   "gmean_ratio": 1.053594038272462,
+   "t": -3.683369929808847,
+   "ci95_ratio": [
+    1.0265885897115763,
+    1.0855730102312553
+   ],
+   "win_rate": 0.14285714285714285
+  },
+  "alma_v2": {
+   "n": 28,
+   "gmean_ratio": 1.0007450094806563,
+   "t": -0.0977575069829336,
+   "ci95_ratio": [
+    0.9847792167881609,
+    1.0146330459993143
+   ],
+   "win_rate": 0.42857142857142855
+  },
+  "snaive": {
+   "n": 28,
+   "gmean_ratio": 0.8435423371972627,
+   "t": 5.826369995813816,
+   "ci95_ratio": [
+    0.7959171233710874,
+    0.891226428188021
+   ],
+   "win_rate": 0.7857142857142857
+  }
+ },
+ "per_task_rel_crps": {
+  "alma_v3": {
+   "m4_yearly/short": 0.853389701316324,
+   "m4_quarterly/short": 0.7421403605061979,
+   "m4_monthly/short": 0.7132363907954358,
+   "m4_daily/short": 0.9183225418649059,
+   "electricity/15T/short": 0.5707169610179359,
+   "electricity/H/short": 0.764678036497167,
+   "electricity/D/short": 0.5255549392697176,
+   "solar/10T/short": 0.7490945030726274,
+   "solar/H/short": 0.7620058715713612,
+   "temperature_rain_with_missing/short": 0.5267020068697162,
+   "kdd_cup_2018_with_missing/H/short": 0.5297085756100005,
+   "car_parts_with_missing/short": 0.6324380937701998,
+   "LOOP_SEATTLE/5T/short": 0.5768092278830523,
+   "LOOP_SEATTLE/H/short": 0.6120285398380334,
+   "bitbrains_fast_storage/5T/short": 0.48370621823370163,
+   "bitbrains_fast_storage/H/short": 0.7681813349116662,
+   "bitbrains_rnd/5T/short": 0.407513158886902,
+   "bitbrains_rnd/H/short": 0.5252986995051685,
+   "electricity/15T/medium": 0.6057803069958134,
+   "electricity/15T/long": 0.8543101509192208,
+   "electricity/H/medium": 0.6563039714824689,
+   "electricity/H/long": 0.6213401148305776,
+   "LOOP_SEATTLE/5T/medium": 0.5615011213264157,
+   "LOOP_SEATTLE/5T/long": 0.5578793432177641,
+   "bitbrains_fast_storage/5T/medium": 0.7178145948593005,
+   "bitbrains_fast_storage/5T/long": 0.6979294661284271,
+   "bitbrains_rnd/5T/medium": 0.6458057967506777,
+   "bitbrains_rnd/5T/long": 0.7651478469827979
+  },
+  "alma_v2": {
+   "m4_yearly/short": 0.988411043355287,
+   "m4_quarterly/short": 0.751492020740258,
+   "m4_monthly/short": 0.6899271300759158,
+   "m4_daily/short": 0.9029286264658876,
+   "electricity/15T/short": 0.5821051656712412,
+   "electricity/H/short": 0.7487492948923279,
+   "electricity/D/short": 0.5340994811307272,
+   "solar/10T/short": 0.7119885842772562,
+   "solar/H/short": 0.7636692150309577,
+   "temperature_rain_with_missing/short": 0.5273909602528285,
+   "kdd_cup_2018_with_missing/H/short": 0.5378442320357735,
+   "car_parts_with_missing/short": 0.6474820685165241,
+   "LOOP_SEATTLE/5T/short": 0.5817168356260073,
+   "LOOP_SEATTLE/H/short": 0.6164174887095524,
+   "bitbrains_fast_storage/5T/short": 0.4863277480471835,
+   "bitbrains_fast_storage/H/short": 0.7862106133899347,
+   "bitbrains_rnd/5T/short": 0.4316401846340038,
+   "bitbrains_rnd/H/short": 0.5134732133184006,
+   "electricity/15T/medium": 0.5319332443719299,
+   "electricity/15T/long": 0.7978366103030955,
+   "electricity/H/medium": 0.6805631438199525,
+   "electricity/H/long": 0.6656397018892054,
+   "LOOP_SEATTLE/5T/medium": 0.5923776446290148,
+   "LOOP_SEATTLE/5T/long": 0.5909812438779283,
+   "bitbrains_fast_storage/5T/medium": 0.6889215414508261,
+   "bitbrains_fast_storage/5T/long": 0.6878327168284067,
+   "bitbrains_rnd/5T/medium": 0.6213098622410282,
+   "bitbrains_rnd/5T/long": 0.6995941844332072
+  },
+  "telos": {
+   "m4_yearly/short": 0.6600597888359965,
+   "m4_quarterly/short": 0.6209471712352985,
+   "m4_monthly/short": 0.6468030664747313,
+   "m4_daily/short": 0.90315301527112,
+   "electricity/15T/short": 0.6043884934889454,
+   "electricity/H/short": 0.6725349125391858,
+   "electricity/D/short": 0.583675344167014,
+   "solar/10T/short": 0.7479142225503056,
+   "solar/H/short": 0.7442806705715848,
+   "temperature_rain_with_missing/short": 0.5357397592125491,
+   "kdd_cup_2018_with_missing/H/short": 0.5520992949412966,
+   "car_parts_with_missing/short": 0.6263954737524738,
+   "LOOP_SEATTLE/5T/short": 0.5387075603218807,
+   "LOOP_SEATTLE/H/short": 0.5715093110621159,
+   "bitbrains_fast_storage/5T/short": 0.5199733019677792,
+   "bitbrains_fast_storage/H/short": 0.757909407595171,
+   "bitbrains_rnd/5T/short": 0.4066208764868964,
+   "bitbrains_rnd/H/short": 0.556729805372369,
+   "electricity/15T/medium": 0.5386995472401861,
+   "electricity/15T/long": 0.9032488427866449,
+   "electricity/H/medium": 0.6069865377349907,
+   "electricity/H/long": 0.6263721024392813,
+   "LOOP_SEATTLE/5T/medium": 0.5288238807671393,
+   "LOOP_SEATTLE/5T/long": 0.534421478009404,
+   "bitbrains_fast_storage/5T/medium": 0.6877504502290186,
+   "bitbrains_fast_storage/5T/long": 0.6273332118849032,
+   "bitbrains_rnd/5T/medium": 0.5972217834308017,
+   "bitbrains_rnd/5T/long": 0.7515155243233589
+  },
+  "snaive": {
+   "m4_yearly/short": 1.0,
+   "m4_quarterly/short": 1.0,
+   "m4_monthly/short": 1.0,
+   "m4_daily/short": 1.0,
+   "electricity/15T/short": 1.0,
+   "electricity/H/short": 1.0,
+   "electricity/D/short": 1.0,
+   "solar/10T/short": 1.0,
+   "solar/H/short": 1.0,
+   "temperature_rain_with_missing/short": 1.0,
+   "kdd_cup_2018_with_missing/H/short": 1.0,
+   "car_parts_with_missing/short": 1.0,
+   "LOOP_SEATTLE/5T/short": 1.0,
+   "LOOP_SEATTLE/H/short": 1.0,
+   "bitbrains_fast_storage/5T/short": 1.0,
+   "bitbrains_fast_storage/H/short": 1.0,
+   "bitbrains_rnd/5T/short": 1.0,
+   "bitbrains_rnd/H/short": 1.0,
+   "electricity/15T/medium": 1.0,
+   "electricity/15T/long": 1.0,
+   "electricity/H/medium": 1.0,
+   "electricity/H/long": 1.0,
+   "LOOP_SEATTLE/5T/medium": 1.0,
+   "LOOP_SEATTLE/5T/long": 1.0,
+   "bitbrains_fast_storage/5T/medium": 1.0,
+   "bitbrains_fast_storage/5T/long": 1.0,
+   "bitbrains_rnd/5T/medium": 1.0,
+   "bitbrains_rnd/5T/long": 1.0
+  }
+ }
+}

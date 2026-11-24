@@ -49,7 +49,11 @@ class AlmaForecaster:
             med = q[..., q.shape[-1] // 2]
             xt = torch.cat([xt, med], 1)[:, -self.context_len :]
             mt = torch.cat([mt, torch.ones_like(med, dtype=torch.bool)], 1)[:, -self.context_len :]
-        return torch.cat(out, 1)[:, :H].float().cpu().numpy()
+        res = torch.cat(out, 1)[:, :H].float().cpu().numpy()
+        del out, xt, mt, q
+        if str(self.device).startswith("mps"):  # release cached blocks of this batch shape (avoids swap)
+            torch.mps.empty_cache()
+        return res
 
     def predict(self, contexts: list, H: int, quantiles: list) -> np.ndarray:
         qs = list(self.model.c.quantiles)

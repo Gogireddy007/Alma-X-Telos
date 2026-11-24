@@ -73,7 +73,7 @@ def main() -> None:
 
     mf = RUN / "manifest.json"
     commit = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, cwd=ROOT).stdout.strip()
-    L = ["# Validation report — Alma-WM (`alma_wm1`)", ""]
+    L = ["# Validation report — Alma-WM (`" + RUN.name + "`)", ""]
     L.append("## 1. Verdict")
     if earned:
         L.append("Highest claim earned (Section F wording): **" + " ".join(earned) + "**")

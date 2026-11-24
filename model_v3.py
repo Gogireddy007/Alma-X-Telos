@@ -160,9 +160,23 @@ def grow_from_v2(model: AlmaV3, sd_old: dict, c_old: AlmaConfig) -> list[int]:
     own[e + "skip.weight"][:do] = sd_old[e + "skip.weight"]
     own[e + "skip.bias"].zero_()
     own[e + "skip.bias"][:do] = sd_old[e + "skip.bias"]
-    # coarse embedding writes only into new dims? No: it starts at zero output; training learns it.
-    for k in ("fc2.weight", "fc2.bias", "skip.weight", "skip.bias"):
-        own["embed_c." + k].zero_()
+    # Coarse embedding: start as the grown fine embedding applied to the pair-averaged stride-32 patch
+    # (input slot j of a coarse patch maps to fine slot j // 2 with half weight). A zero-output init would
+    # put every coarse token at RMSNorm's singular point (x = 0), which amplifies its gradient ~1/sqrt(eps)
+    # per layer and overflowed the gradient norm on 8k batches.
+    P_, cp_ = model.c.patch, model.c.coarse_patch
+    r_ = cp_ // P_
+    jmap = torch.arange(cp_) // r_
+    for lin in ("fc1", "skip"):
+        W = own[f"embed.{lin}.weight"]
+        Wc = own[f"embed_c.{lin}.weight"]
+        Wc.zero_()
+        Wc[:, :cp_] = W[:, jmap] / r_
+        Wc[:, cp_ : 2 * cp_] = W[:, P_ + jmap] / r_
+        Wc[:, 2 * cp_ :] = W[:, 2 * P_ :]
+        own[f"embed_c.{lin}.bias"].copy_(own[f"embed.{lin}.bias"])
+    own["embed_c.fc2.weight"].copy_(own["embed.fc2.weight"])
+    own["embed_c.fc2.bias"].copy_(own["embed.fc2.bias"])
 
     for i in range(Ln):
         b = f"blocks.{i}."
@@ -214,7 +228,7 @@ def grow_from_v2(model: AlmaV3, sd_old: dict, c_old: AlmaConfig) -> list[int]:
 # ------------------------------------------------------------------------------------------------
 
 
-def balanced_quantile_loss(q, mu, sd, y, ym, quantiles, clip, gamma: float = 0.5) -> Tensor:
+def balanced_quantile_loss(q, mu, sd, y, ym, quantiles, clip, gamma: float = 0.5, norm: str = "token") -> Tensor:
     """Pinball loss averaged per horizon step first (each step weighted equally whatever its number of valid
     targets), then weighted by (1 + h/H)^gamma, so long horizons are not under-trained."""
     yz = to_frame(y, mu[..., None], sd[..., None], clip)
@@ -222,11 +236,20 @@ def balanced_quantile_loss(q, mu, sd, y, ym, quantiles, clip, gamma: float = 0.5
     d = yz[..., None] - q
     pin = torch.maximum(qs * d, (qs - 1.0) * d).mean(-1)  # (B, N, H)
     w = ym.to(pin.dtype)
+    H = pin.shape[-1]
+    hw0 = (1 + torch.arange(H, device=q.device, dtype=q.dtype) / H) ** gamma
     per_h = (pin * w).sum((0, 1)) / w.sum((0, 1)).clamp_min(1.0)  # (H,)
-    H = per_h.shape[0]
-    hw = (1 + torch.arange(H, device=q.device, dtype=q.dtype) / H) ** gamma
-    hw = hw * (w.sum((0, 1)) > 0)
-    return (per_h * hw).sum() / hw.sum().clamp_min(1e-6)
+    hw = hw0 * (w.sum((0, 1)) > 0)
+    tok = (per_h * hw).sum() / hw.sum().clamp_min(1e-6)
+    if norm == "token":
+        return tok
+    # per-series: same horizon-balanced loss computed inside each series, then averaged over series,
+    # so a short series counts as much as a long one.
+    ps = (pin * w).sum(1) / w.sum(1).clamp_min(1.0)  # (B, H)
+    hws = hw0 * (w.sum(1) > 0)  # (B, H)
+    has = hws.sum(-1) > 0
+    ser = ((ps * hws).sum(-1) / hws.sum(-1).clamp_min(1e-6))[has].mean()
+    return ser if norm == "series" else 0.5 * (tok + ser)
 
 
 class JEPAHead(nn.Module):

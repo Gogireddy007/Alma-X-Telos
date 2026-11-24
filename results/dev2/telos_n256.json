@@ -1,0 +1,594 @@
+{
+ "model": "telos",
+ "ckpt": null,
+ "ctx": 2048,
+ "n": 256,
+ "seed": 1,
+ "rel_crps": 0.6155927326471375,
+ "rel_mase": 0.8073593321409425,
+ "secs": 349.26194405555725,
+ "per_task": [
+  {
+   "task": "LOOP_SEATTLE_5T__long",
+   "freq": "5T",
+   "rel_crps": 0.5333589348098171,
+   "rel_mase": 0.6752593868055577
+  },
+  {
+   "task": "LOOP_SEATTLE_5T__medium",
+   "freq": "5T",
+   "rel_crps": 0.5491075493488723,
+   "rel_mase": 0.7026574466332647
+  },
+  {
+   "task": "LOOP_SEATTLE_5T__short",
+   "freq": "5T",
+   "rel_crps": 0.604992951787142,
+   "rel_mase": 0.7492487352587797
+  },
+  {
+   "task": "LOOP_SEATTLE_D__short",
+   "freq": "D",
+   "rel_crps": 0.4147981459740499,
+   "rel_mase": 0.5096477843666158
+  },
+  {
+   "task": "LOOP_SEATTLE_H__long",
+   "freq": "H",
+   "rel_crps": 0.45850954070973293,
+   "rel_mase": 0.5776471374008035
+  },
+  {
+   "task": "LOOP_SEATTLE_H__medium",
+   "freq": "H",
+   "rel_crps": 0.49817180241204173,
+   "rel_mase": 0.6154980105022467
+  },
+  {
+   "task": "LOOP_SEATTLE_H__short",
+   "freq": "H",
+   "rel_crps": 0.5379936848041694,
+   "rel_mase": 0.6572218406262403
+  },
+  {
+   "task": "M_DENSE_D__short",
+   "freq": "D",
+   "rel_crps": 0.3500117609366601,
+   "rel_mase": 0.4463394054874398
+  },
+  {
+   "task": "M_DENSE_H__long",
+   "freq": "H",
+   "rel_crps": 0.4171775679777559,
+   "rel_mase": 0.5100868775455507
+  },
+  {
+   "task": "M_DENSE_H__medium",
+   "freq": "H",
+   "rel_crps": 0.37729041649350553,
+   "rel_mase": 0.47188326274483816
+  },
+  {
+   "task": "M_DENSE_H__short",
+   "freq": "H",
+   "rel_crps": 0.42390951630486484,
+   "rel_mase": 0.5192296586257293
+  },
+  {
+   "task": "SZ_TAXI_15T__long",
+   "freq": "15T",
+   "rel_crps": 0.6043550939405424,
+   "rel_mase": 0.7642299527530058
+  },
+  {
+   "task": "SZ_TAXI_15T__medium",
+   "freq": "15T",
+   "rel_crps": 0.6069585457718991,
+   "rel_mase": 0.7748308879217188
+  },
+  {
+   "task": "SZ_TAXI_15T__short",
+   "freq": "15T",
+   "rel_crps": 0.5775415827444474,
+   "rel_mase": 0.7354060063231964
+  },
+  {
+   "task": "SZ_TAXI_H__short",
+   "freq": "H",
+   "rel_crps": 0.6183823245640558,
+   "rel_mase": 0.7868327006897678
+  },
+  {
+   "task": "bitbrains_fast_storage_5T__long",
+   "freq": "5T",
+   "rel_crps": 0.7769934699902412,
+   "rel_mase": 0.8765174733643293
+  },
+  {
+   "task": "bitbrains_fast_storage_5T__medium",
+   "freq": "5T",
+   "rel_crps": 0.686908079613107,
+   "rel_mase": 0.8113807543816369
+  },
+  {
+   "task": "bitbrains_fast_storage_5T__short",
+   "freq": "5T",
+   "rel_crps": 0.295958894896117,
+   "rel_mase": 0.6995076829054825
+  },
+  {
+   "task": "bitbrains_fast_storage_H__short",
+   "freq": "H",
+   "rel_crps": 0.7488481277843234,
+   "rel_mase": 0.8745707804151119
+  },
+  {
+   "task": "bitbrains_rnd_5T__long",
+   "freq": "5T",
+   "rel_crps": 0.7593831912779785,
+   "rel_mase": 0.9160552506980096
+  },
+  {
+   "task": "bitbrains_rnd_5T__medium",
+   "freq": "5T",
+   "rel_crps": 0.6004687636623625,
+   "rel_mase": 1.0152410968969077
+  },
+  {
+   "task": "bitbrains_rnd_5T__short",
+   "freq": "5T",
+   "rel_crps": 0.5096866339823838,
+   "rel_mase": 0.8253480084336782
+  },
+  {
+   "task": "bitbrains_rnd_H__short",
+   "freq": "H",
+   "rel_crps": 0.6079256888263082,
+   "rel_mase": 0.9968743747549258
+  },
+  {
+   "task": "bizitobs_application__long",
+   "freq": "10S",
+   "rel_crps": 1.5600452233077522,
+   "rel_mase": 2.495171934462685
+  },
+  {
+   "task": "bizitobs_application__medium",
+   "freq": "10S",
+   "rel_crps": 1.555655548853576,
+   "rel_mase": 2.7479443773097203
+  },
+  {
+   "task": "bizitobs_application__short",
+   "freq": "10S",
+   "rel_crps": 0.7516314939961275,
+   "rel_mase": 1.635841543661354
+  },
+  {
+   "task": "bizitobs_l2c_5T__long",
+   "freq": "5T",
+   "rel_crps": 0.4848559016159835,
+   "rel_mase": 0.6458634144379808
+  },
+  {
+   "task": "bizitobs_l2c_5T__medium",
+   "freq": "5T",
+   "rel_crps": 0.42302187161904803,
+   "rel_mase": 0.5588921951542769
+  },
+  {
+   "task": "bizitobs_l2c_5T__short",
+   "freq": "5T",
+   "rel_crps": 0.22806585626769943,
+   "rel_mase": 0.2864582793125702
+  },
+  {
+   "task": "bizitobs_l2c_H__long",
+   "freq": "H",
+   "rel_crps": 0.319051525061093,
+   "rel_mase": 0.4085698361729951
+  },
+  {
+   "task": "bizitobs_l2c_H__medium",
+   "freq": "H",
+   "rel_crps": 0.2568635883551908,
+   "rel_mase": 0.3448326389183753
+  },
+  {
+   "task": "bizitobs_l2c_H__short",
+   "freq": "H",
+   "rel_crps": 0.33030611965472195,
+   "rel_mase": 0.42518627050068
+  },
+  {
+   "task": "bizitobs_service__long",
+   "freq": "10S",
+   "rel_crps": 1.6063519301309828,
+   "rel_mase": 2.8373988047550487
+  },
+  {
+   "task": "bizitobs_service__medium",
+   "freq": "10S",
+   "rel_crps": 1.5555925295767004,
+   "rel_mase": 2.7845521130955944
+  },
+  {
+   "task": "bizitobs_service__short",
+   "freq": "10S",
+   "rel_crps": 0.6187080032627292,
+   "rel_mase": 1.4516543019311627
+  },
+  {
+   "task": "car_parts_with_missing__short",
+   "freq": "M",
+   "rel_crps": 0.6136240175657975,
+   "rel_mase": 0.7732935008086607
+  },
+  {
+   "task": "covid_deaths__short",
+   "freq": "D",
+   "rel_crps": 0.3190321744968307,
+   "rel_mase": 0.8041297647118003
+  },
+  {
+   "task": "electricity_15T__long",
+   "freq": "15T",
+   "rel_crps": 0.6952956162067923,
+   "rel_mase": 0.8373845789647701
+  },
+  {
+   "task": "electricity_15T__medium",
+   "freq": "15T",
+   "rel_crps": 0.7614164173120971,
+   "rel_mase": 0.8423248429129987
+  },
+  {
+   "task": "electricity_15T__short",
+   "freq": "15T",
+   "rel_crps": 0.5648402176527704,
+   "rel_mase": 0.6512639182014971
+  },
+  {
+   "task": "electricity_D__short",
+   "freq": "D",
+   "rel_crps": 0.6649759884725666,
+   "rel_mase": 0.8139512279549634
+  },
+  {
+   "task": "electricity_H__long",
+   "freq": "H",
+   "rel_crps": 0.6341173035854221,
+   "rel_mase": 0.82666818785062
+  },
+  {
+   "task": "electricity_H__medium",
+   "freq": "H",
+   "rel_crps": 0.6074697322136879,
+   "rel_mase": 0.7986506756558648
+  },
+  {
+   "task": "electricity_H__short",
+   "freq": "H",
+   "rel_crps": 0.5190156198882698,
+   "rel_mase": 0.6770845247064098
+  },
+  {
+   "task": "electricity_W__short",
+   "freq": "W-FRI",
+   "rel_crps": 0.6456764965381305,
+   "rel_mase": 0.8346155824342663
+  },
+  {
+   "task": "ett1_15T__long",
+   "freq": "15T",
+   "rel_crps": 0.6721096748996831,
+   "rel_mase": 0.8651471919499583
+  },
+  {
+   "task": "ett1_15T__medium",
+   "freq": "15T",
+   "rel_crps": 0.6937687347445198,
+   "rel_mase": 0.8595181407066861
+  },
+  {
+   "task": "ett1_15T__short",
+   "freq": "15T",
+   "rel_crps": 0.5583501555492588,
+   "rel_mase": 0.7541199904813103
+  },
+  {
+   "task": "ett1_D__short",
+   "freq": "D",
+   "rel_crps": 0.6907393637952148,
+   "rel_mase": 0.9725414054400023
+  },
+  {
+   "task": "ett1_H__long",
+   "freq": "H",
+   "rel_crps": 0.7000840070618934,
+   "rel_mase": 0.8895177536014717
+  },
+  {
+   "task": "ett1_H__medium",
+   "freq": "H",
+   "rel_crps": 0.6520681970489917,
+   "rel_mase": 0.8059050173957372
+  },
+  {
+   "task": "ett1_H__short",
+   "freq": "H",
+   "rel_crps": 0.676616047162689,
+   "rel_mase": 0.849889287249662
+  },
+  {
+   "task": "ett1_W__short",
+   "freq": "W-THU",
+   "rel_crps": 0.7144468046715603,
+   "rel_mase": 0.9028760275303658
+  },
+  {
+   "task": "ett2_15T__long",
+   "freq": "15T",
+   "rel_crps": 0.7443052759389404,
+   "rel_mase": 0.9039597602950346
+  },
+  {
+   "task": "ett2_15T__medium",
+   "freq": "15T",
+   "rel_crps": 0.69878364287908,
+   "rel_mase": 0.8658050800267401
+  },
+  {
+   "task": "ett2_15T__short",
+   "freq": "15T",
+   "rel_crps": 0.5548006302174626,
+   "rel_mase": 0.7292230784762772
+  },
+  {
+   "task": "ett2_D__short",
+   "freq": "D",
+   "rel_crps": 0.808576569629142,
+   "rel_mase": 1.0375894895244357
+  },
+  {
+   "task": "ett2_H__long",
+   "freq": "H",
+   "rel_crps": 0.7724401008613103,
+   "rel_mase": 0.9358465091516762
+  },
+  {
+   "task": "ett2_H__medium",
+   "freq": "H",
+   "rel_crps": 0.6866372475193356,
+   "rel_mase": 0.864329141950313
+  },
+  {
+   "task": "ett2_H__short",
+   "freq": "H",
+   "rel_crps": 0.652412747200219,
+   "rel_mase": 0.8212040811604012
+  },
+  {
+   "task": "ett2_W__short",
+   "freq": "W-THU",
+   "rel_crps": 0.7691010385211332,
+   "rel_mase": 0.920150427768389
+  },
+  {
+   "task": "hierarchical_sales_D__short",
+   "freq": "D",
+   "rel_crps": 0.5793030337425953,
+   "rel_mase": 0.6988783777472994
+  },
+  {
+   "task": "hierarchical_sales_W__short",
+   "freq": "W-WED",
+   "rel_crps": 0.5536352977726723,
+   "rel_mase": 0.7139894096584858
+  },
+  {
+   "task": "hospital__short",
+   "freq": "M",
+   "rel_crps": 0.7505507480344339,
+   "rel_mase": 0.8457265766632827
+  },
+  {
+   "task": "jena_weather_10T__long",
+   "freq": "10T",
+   "rel_crps": 0.7012317685554412,
+   "rel_mase": 0.82502067760045
+  },
+  {
+   "task": "jena_weather_10T__medium",
+   "freq": "10T",
+   "rel_crps": 0.6302209181957726,
+   "rel_mase": 0.8277945746528225
+  },
+  {
+   "task": "jena_weather_10T__short",
+   "freq": "10T",
+   "rel_crps": 0.43971391756362316,
+   "rel_mase": 0.3895981031525667
+  },
+  {
+   "task": "jena_weather_D__short",
+   "freq": "D",
+   "rel_crps": 0.6449904187738591,
+   "rel_mase": 0.7567412541410555
+  },
+  {
+   "task": "jena_weather_H__long",
+   "freq": "H",
+   "rel_crps": 0.6710182839714985,
+   "rel_mase": 0.8523819810000621
+  },
+  {
+   "task": "jena_weather_H__medium",
+   "freq": "H",
+   "rel_crps": 0.7448210586657589,
+   "rel_mase": 0.9231351220592127
+  },
+  {
+   "task": "jena_weather_H__short",
+   "freq": "H",
+   "rel_crps": 0.6679626418599828,
+   "rel_mase": 0.7515243074274892
+  },
+  {
+   "task": "kdd_cup_2018_with_missing_D__short",
+   "freq": "D",
+   "rel_crps": 0.6941065847778336,
+   "rel_mase": 0.7808261906290557
+  },
+  {
+   "task": "kdd_cup_2018_with_missing_H__long",
+   "freq": "H",
+   "rel_crps": 0.6352772784265145,
+   "rel_mase": 0.7501681456902315
+  },
+  {
+   "task": "kdd_cup_2018_with_missing_H__medium",
+   "freq": "H",
+   "rel_crps": 0.638497537174475,
+   "rel_mase": 0.7398569175961752
+  },
+  {
+   "task": "kdd_cup_2018_with_missing_H__short",
+   "freq": "H",
+   "rel_crps": 0.5519199280685159,
+   "rel_mase": 0.7267896201787684
+  },
+  {
+   "task": "m4_daily__short",
+   "freq": "D",
+   "rel_crps": 0.8873971078816741,
+   "rel_mase": 1.205001774461536
+  },
+  {
+   "task": "m4_hourly__short",
+   "freq": "H",
+   "rel_crps": 0.4819060454967783,
+   "rel_mase": 1.0801413584283637
+  },
+  {
+   "task": "m4_monthly__short",
+   "freq": "M",
+   "rel_crps": 0.6721593731805202,
+   "rel_mase": 0.759556049854153
+  },
+  {
+   "task": "m4_quarterly__short",
+   "freq": "Q-DEC",
+   "rel_crps": 0.6547289789295063,
+   "rel_mase": 0.7673953833173703
+  },
+  {
+   "task": "m4_weekly__short",
+   "freq": "W-SUN",
+   "rel_crps": 0.7012878196175897,
+   "rel_mase": 1.1225551736752133
+  },
+  {
+   "task": "m4_yearly__short",
+   "freq": "A-DEC",
+   "rel_crps": 0.7225946645321153,
+   "rel_mase": 0.8004823959830807
+  },
+  {
+   "task": "restaurant__short",
+   "freq": "D",
+   "rel_crps": 0.546271920702598,
+   "rel_mase": 0.7073241546917988
+  },
+  {
+   "task": "saugeenday_D__short",
+   "freq": "D",
+   "rel_crps": 0.8096259971512332,
+   "rel_mase": 0.9760033506087293
+  },
+  {
+   "task": "saugeenday_M__short",
+   "freq": "M",
+   "rel_crps": 0.6125366616734128,
+   "rel_mase": 0.7563099226782358
+  },
+  {
+   "task": "saugeenday_W__short",
+   "freq": "W-THU",
+   "rel_crps": 0.557095579511657,
+   "rel_mase": 0.6822629766344188
+  },
+  {
+   "task": "solar_10T__long",
+   "freq": "10T",
+   "rel_crps": 0.7558120021189423,
+   "rel_mase": 0.9549894861182391
+  },
+  {
+   "task": "solar_10T__medium",
+   "freq": "10T",
+   "rel_crps": 0.6927735068576203,
+   "rel_mase": 0.8591071940776509
+  },
+  {
+   "task": "solar_10T__short",
+   "freq": "10T",
+   "rel_crps": 0.7751593735219015,
+   "rel_mase": 1.002251150975621
+  },
+  {
+   "task": "solar_D__short",
+   "freq": "D",
+   "rel_crps": 0.6882985430596426,
+   "rel_mase": 0.8561032806934479
+  },
+  {
+   "task": "solar_H__long",
+   "freq": "H",
+   "rel_crps": 0.7188843114700972,
+   "rel_mase": 0.909460708137319
+  },
+  {
+   "task": "solar_H__medium",
+   "freq": "H",
+   "rel_crps": 0.785633284216896,
+   "rel_mase": 0.9749763287378294
+  },
+  {
+   "task": "solar_H__short",
+   "freq": "H",
+   "rel_crps": 0.7460633355007986,
+   "rel_mase": 0.9192674535433621
+  },
+  {
+   "task": "solar_W__short",
+   "freq": "W-FRI",
+   "rel_crps": 0.5967373086301472,
+   "rel_mase": 0.8383496009494726
+  },
+  {
+   "task": "temperature_rain_with_missing__short",
+   "freq": "D",
+   "rel_crps": 0.6215810538558446,
+   "rel_mase": 0.6343458271427849
+  },
+  {
+   "task": "us_births_D__short",
+   "freq": "D",
+   "rel_crps": 0.2520701698602351,
+   "rel_mase": 0.31630271771611135
+  },
+  {
+   "task": "us_births_M__short",
+   "freq": "M",
+   "rel_crps": 1.1098646335240494,
+   "rel_mase": 1.5073515484835118
+  },
+  {
+   "task": "us_births_W__short",
+   "freq": "W-TUE",
+   "rel_crps": 0.6482959122799126,
+   "rel_mase": 0.8553523102208443
+  }
+ ]
+}

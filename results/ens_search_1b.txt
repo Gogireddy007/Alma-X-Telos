@@ -1,0 +1,17 @@
+97 tasks, members: A, B, C, D, E, F, G, v2, v3_10k, v3_10k_c2, v3_16k, v3ft3, v3new_2000
+  single A                    all 0.9906  sealed28 1.0274
+  single B                    all 0.9901  sealed28 1.0299
+  single C                    all 0.9853  sealed28 1.0185
+  single D                    all 0.9842  sealed28 1.0194
+  single E                    all 0.9848  sealed28 1.0196
+  single F                    all 0.9918  sealed28 1.0278
+  single G                    all 0.9870  sealed28 1.0192
+  single v2                   all 0.9904  sealed28 1.0261
+  single v3_10k               all 0.9809  sealed28 1.0334
+  single v3_10k_c2            all 0.9954  sealed28 1.0349
+  single v3_16k               all 0.9832  sealed28 1.0352
+  single v3ft3                all 0.9829  sealed28 1.0369
+  single v3new_2000           all 0.9816  sealed28 1.0323
+greedy global                cv all 0.9750  sealed28 1.0211  win 0.43  t -1.33
+   picked on half 0: *: {'v3new_2000': 1, 'D': 2, 'v3_16k': 1}
+   picked on half 1: *: {'v3_10k': 1, 'C': 1, 'v3new_2000': 1}

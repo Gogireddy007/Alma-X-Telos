@@ -200,7 +200,7 @@ class Alma(nn.Module):
 
 
 def quantile_loss(
-    q: Tensor, mu: Tensor, sd: Tensor, y: Tensor, ym: Tensor, quantiles: tuple, clip: float
+    q: Tensor, mu: Tensor, sd: Tensor, y: Tensor, ym: Tensor, quantiles: tuple, clip: float, norm: str = "token"
 ) -> Tensor:
     """q: (B,N,H,Q) frame-space predictions; y, ym: (B,N,H) raw targets & validity; mu, sd: (B,N)."""
     yz = to_frame(y, mu[..., None], sd[..., None], clip)
@@ -208,7 +208,12 @@ def quantile_loss(
     diff = yz[..., None] - q
     pin = torch.maximum(qs * diff, (qs - 1.0) * diff).mean(-1)
     w = ym.to(pin.dtype)
-    return (pin * w).sum() / w.sum().clamp_min(1.0)
+    tok = (pin * w).sum() / w.sum().clamp_min(1.0)
+    if norm == "token":
+        return tok
+    has = w.sum((1, 2)) > 0  # per-series mean, then mean over series: every series counts equally
+    ser = ((pin * w).sum((1, 2)) / w.sum((1, 2)).clamp_min(1.0))[has].mean()
+    return ser if norm == "series" else 0.5 * (tok + ser)
 
 
 def config_to_dict(c: AlmaConfig) -> dict:

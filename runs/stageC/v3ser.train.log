@@ -1,0 +1,4 @@
+fine-tune from runs/alma_v3/ema_10000.pt (step 10000)
+Alma v3 params=61.80M (+JEPA head 7.65M) device=mps start=0
+/Users/yugandharreddygogireddy/.local/share/uv/python/cpython-3.11.16-macos-aarch64-none/lib/python3.11/multiprocessing/resource_tracker.py:254: UserWarning: resource_tracker: There appear to be 26 leaked semaphore objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '

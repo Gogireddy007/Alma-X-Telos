@@ -1,0 +1,6 @@
+trial,utc,data,description
+A_control|B_bucket|C_bucket_series|D_bucket_mix,2026-11-18T19:57:25Z,dev2 (seed-0 dev sample, random windows),Stage A: 3k-step fine-tunes of v2@6k comparing sampler and loss normalisation
+4,stageA,2026-11-18,done: C(series) 0.9946 vs A all / 0.9913 sealed28; D(mix) 0.9935/0.9922; B(bucket token) 0.9995/1.0024
+5,stageB,2026-11-19,launched: E_short (D+15% ETS short) 3k; v3 dev2+soup; v3 fine-tune bucket+mix 4k
+6,stageC,2026-11-19,queued: v3 16k/20k dev2; ctx & model ensembles; rule-based next v3 run (continue ft or series loss)
+7,stageD,2026-11-19,queued: +1.5B pts new GiftEvalPretrain shards (11 large sources); small A/B F_new vs A, G_new vs D; if helps -> v3 12k steps on both corpora

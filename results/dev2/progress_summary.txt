@@ -1,0 +1,21 @@
+    all sealed28      t   win   n  file   (ref results/dev2/telos_n256.json)
+ 0.9740   1.0171  -1.48  0.44  97  results/dev2/ens_v3+D_n256.json
+ 0.9745   1.0209  -1.43  0.44  97  results/dev2/ens_v3+v3ft+D_n256.json
+ 0.9754   1.0152  -1.42  0.43  97  results/dev2/ens_v3+D+C_n256.json
+ 0.9809   1.0334  -1.01  0.38  97  results/dev2/v3_10k_n256.json
+ 0.9812   1.0320  -1.01  0.40  97  results/dev2/v3_soup_8_10_12_n256.json
+ 0.9825   1.0365  -0.94  0.38  97  results/dev2/stageB_v3ft_soup_n256.json
+ 0.9829   1.0369  -0.91  0.38  97  results/dev2/stageB_v3ft_3000_n256.json
+ 0.9832   1.0352  -0.89  0.38  97  results/dev2/v3_16k_n256.json
+ 0.9839   1.0293  -0.93  0.38  97  results/dev2/ens_v3ctx2_n256.json
+ 0.9840   1.0374  -0.86  0.37  97  results/dev2/stageB_v3ft_4000_n256.json
+ 0.9842   1.0194  -0.93  0.39  97  results/dev2/stageA_D_bucket_mix_n256.json
+ 0.9848   1.0196  -0.91  0.41  97  results/dev2/stageB_E_short_n256.json
+ 0.9851   1.0391  -0.80  0.38  97  results/dev2/v3_20k_n256.json
+ 0.9853   1.0185  -0.87  0.40  97  results/dev2/stageA_C_bucket_series_n256.json
+ 0.9870   1.0192  -0.79  0.40  97  results/dev2/stageD_G_new_n256.json
+ 0.9901   1.0299  -0.56  0.41  97  results/dev2/stageA_B_bucket_n256.json
+ 0.9904   1.0261  -0.56  0.41  97  results/dev2/v2_6k_n256.json
+ 0.9906   1.0274  -0.54  0.40  97  results/dev2/stageA_A_control_n256.json
+ 0.9918   1.0278  -0.47  0.39  97  results/dev2/stageD_F_new_n256.json
+ 1.0000   1.0000    nan  0.00  97  results/dev2/telos_n256.json

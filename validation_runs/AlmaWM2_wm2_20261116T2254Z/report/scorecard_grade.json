@@ -1,0 +1,598 @@
+[
+ {
+  "gate": "4",
+  "check": "SIMULATED one-step (1-16) CRPS beats ARX/persistence/SN24",
+  "result": {
+   "arx": [
+    1.048,
+    -2.8
+   ],
+   "persistence": [
+    0.534,
+    24.9
+   ],
+   "snaive24": [
+    0.358,
+    35.8
+   ]
+  },
+  "threshold": "t>=3 each (Holm)",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "5.1",
+  "check": "SIMULATED rollout beats every simple law in every horizon bucket",
+  "result": {
+   "1-16": {
+    "arx": 1.048,
+    "persistence": 0.534,
+    "snaive24": 0.358
+   },
+   "17-64": {
+    "arx": 0.915,
+    "persistence": 0.377,
+    "snaive24": 0.349
+   },
+   "65-256": {
+    "arx": 0.868,
+    "persistence": 0.319,
+    "snaive24": 0.311
+   },
+   "257-512": {
+    "arx": 0.929,
+    "persistence": 0.341,
+    "snaive24": 0.335
+   }
+  },
+  "threshold": "t>=3 every bucket",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "5.1",
+  "check": "error growth CRPS(257-512)/CRPS(1-16)",
+  "result": 1.83,
+  "threshold": "<= 10",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "5.2",
+  "check": "open-loop vs closed-loop (re-anchored) CRPS gap",
+  "result": 2.147,
+  "threshold": "reported",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "5.5",
+  "check": "no mode collapse: median 80%-width ratio model/oracle",
+  "result": 1.208,
+  "threshold": "descriptive (~1)",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "5.3",
+  "check": "PIT histogram (10 bins, expected 0.1 each)",
+  "result": [
+   0.107,
+   0.099,
+   0.097,
+   0.093,
+   0.094,
+   0.097,
+   0.095,
+   0.095,
+   0.099,
+   0.124
+  ],
+  "threshold": "descriptive",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "5.4",
+  "check": "distribution two-sample / discriminator test",
+  "result": "not computable: model emits marginal quantiles, no joint sample paths",
+  "threshold": "required",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "5.6",
+  "check": "physical constraint violations (median < 0 for non-negative systems)",
+  "result": 0.1915,
+  "threshold": "<= 0.01",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.1",
+  "check": "SIMULATED action-aware beats action-blind (CRPS)",
+  "result": [
+   0.634,
+   20.4
+  ],
+  "threshold": "t>=3",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.2",
+  "check": "SIMULATED effect sign accuracy (|true effect|>0.5 sd)",
+  "result": {
+   "wm": 0.971,
+   "arx": 0.922,
+   "n": 1122
+  },
+  "threshold": ">= 0.90",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.2",
+  "check": "SIMULATED monotone size sweeps predicted monotone, same direction",
+  "result": {
+   "rate": 0.954,
+   "n": 680
+  },
+  "threshold": ">= 0.95",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.5*",
+  "check": "SIMULATED counterfactual CRPS beats ARX (true counterfactual trajectories)",
+  "result": [
+   0.981,
+   0.7
+  ],
+  "threshold": "t>=3",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.3",
+  "check": "impact accuracy on real interventions",
+  "result": "no real interventional data available",
+  "threshold": "required",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.4",
+  "check": "natural experiments on real data",
+  "result": "no real interventional data available",
+  "threshold": "required",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.5",
+  "check": "counterfactual vs nature on real data",
+  "result": "no real interventional data available",
+  "threshold": "required",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.6",
+  "check": "randomised live checks",
+  "result": "no live deployment",
+  "threshold": "when live",
+  "status": "N/A",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.7",
+  "check": "self-consistency (split trades)",
+  "result": "market-specific",
+  "threshold": "-",
+  "status": "N/A",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "6.8",
+  "check": "reflexivity",
+  "result": "market-specific",
+  "threshold": "-",
+  "status": "N/A",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "7 / 4.4",
+  "check": "SIMULATED coverage 80% / 60% (wm_aware)",
+  "result": [
+   0.769,
+   0.571
+  ],
+  "threshold": "+-0.02",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "7.2",
+  "check": "uncertainty predicts error (Spearman width vs |error|)",
+  "result": [
+   0.886,
+   53.8
+  ],
+  "threshold": "t>=3",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "7.3",
+  "check": "SIMULATED conformal 80% interval coverage (calibrated on sim_val)",
+  "result": 0.796,
+  "threshold": "+-0.02",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "7.4",
+  "check": "OOD flag (Mahalanobis of state) AUROC for top-decile errors",
+  "result": {
+   "primary_mahalanobis": 0.525,
+   "secondary_disagreement": 0.688
+  },
+  "threshold": ">= 0.75",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "7.5",
+  "check": "fallback (ARX) on flagged episodes no worse than the model",
+  "result": {
+   "n_flagged": 637,
+   "gmean_model": 0.27843118975488285,
+   "gmean_fallback": 0.3132292457200606
+  },
+  "threshold": "fallback <= model",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "7.6",
+  "check": "novel family (tanks) flag rate vs in-family flag rate",
+  "result": {
+   "tanks": 0.565,
+   "in_family": 0.796
+  },
+  "threshold": "descriptive",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "7.7",
+  "check": "risk-coverage (gmean CRPS keeping least-OOD fraction)",
+  "result": {
+   "0.5": 0.2781048005193886,
+   "0.7": 0.27612899562764476,
+   "0.9": 0.2727129611908753,
+   "1.0": 0.2749657254863075
+  },
+  "threshold": "descriptive",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "8.10",
+  "check": "placebo: true actions beat shuffled actions",
+  "result": [
+   0.53,
+   26.5
+  ],
+  "threshold": "t>=3",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "8.10",
+  "check": "placebo: random actions do not beat action-blind",
+  "result": [
+   1.359,
+   -12.5
+  ],
+  "threshold": "t<3",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "8.10",
+  "check": "placebo: time-shifted (16 steps) predictions lose skill",
+  "result": [
+   0.645,
+   20.2
+  ],
+  "threshold": "t>=3",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "9.2/9.3",
+  "check": "SIMULATED by system family: aware/ARX gmean ratio",
+  "result": {
+   "bilinear": 0.855,
+   "fopdt": 1.013,
+   "hammer": 0.951,
+   "inventory": 0.822,
+   "logistic": 0.915,
+   "lss": 1.316,
+   "pricing": 0.626,
+   "thermal": 0.983
+  },
+  "threshold": "descriptive",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "9.7",
+  "check": "transfer to held-out family (tanks), gmean CRPS",
+  "result": {
+   "wm_aware": 0.119,
+   "wm_blind": 0.211,
+   "arx": 0.13,
+   "persistence": 0.376,
+   "oracle": 0.032,
+   "aware_vs_arx": 0.919
+  },
+  "threshold": "descriptive",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "10.1",
+  "check": "linear probes: state -> true system parameters (5-fold CV R\u00b2, permutation p)",
+  "result": {
+   "thermal.a": [
+    0.66,
+    0.01
+   ],
+   "thermal.b": [
+    0.28,
+    0.01
+   ],
+   "fopdt.tau": [
+    0.23,
+    0.01
+   ],
+   "fopdt.delay": [
+    -0.04,
+    0.634
+   ],
+   "fopdt.K": [
+    0.32,
+    0.01
+   ],
+   "inventory.lag": [
+    0.17,
+    0.01
+   ],
+   "pricing.elast": [
+    0.07,
+    0.02
+   ],
+   "pricing.carry": [
+    0.05,
+    0.02
+   ]
+  },
+  "threshold": "R\u00b2>0 and p<0.01 for every probe",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "10.1",
+  "check": "latent effective rank (non-collapse)",
+  "result": 177.6,
+  "threshold": ">= 16",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "10.4",
+  "check": "latent stability across training seeds",
+  "result": "only one training seed exists",
+  "threshold": ">= 0.8",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "10.2",
+  "check": "attribution faithfulness",
+  "result": "not run",
+  "threshold": "required",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "10.5",
+  "check": "disentanglement",
+  "result": "not run",
+  "threshold": "required",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "10.6/10.7",
+  "check": "explanation decomposition / residual load",
+  "result": "no named-component decomposition",
+  "threshold": "-",
+  "status": "N/A",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "12",
+  "check": "SIMULATED MPC real cost: WM vs default plan and vs ARX-MPC",
+  "result": {
+   "vs_default": [
+    0.418,
+    7.9
+   ],
+   "vs_arx": [
+    1.087,
+    -1.4
+   ],
+   "oracle_vs_default": 0.332
+  },
+  "threshold": "t>=3 both",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "12.1",
+  "check": "imagined vs real gain (sum real / sum imagined)",
+  "result": 1.078,
+  "threshold": ">= 0.70",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "12.2",
+  "check": "exploit hunt: corr(imagined gain, imagined-real gap)",
+  "result": -0.204,
+  "threshold": "descriptive",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "12.5",
+  "check": "execution / portfolio / risk / deflated Sharpe",
+  "result": "no trading component",
+  "threshold": "-",
+  "status": "N/A",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "12.6",
+  "check": "execution / portfolio / risk / deflated Sharpe",
+  "result": "no trading component",
+  "threshold": "-",
+  "status": "N/A",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "12.7",
+  "check": "execution / portfolio / risk / deflated Sharpe",
+  "result": "no trading component",
+  "threshold": "-",
+  "status": "N/A",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "12.8",
+  "check": "execution / portfolio / risk / deflated Sharpe",
+  "result": "no trading component",
+  "threshold": "-",
+  "status": "N/A",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "4.2",
+  "check": "REAL sealed GIFT windows: Alma-WM CRPS beats SN / persistence / Telos-Small",
+  "result": {
+   "snaive": [
+    0.638,
+    11.1,
+    "wins 1.00"
+   ],
+   "persistence": [
+    0.553,
+    6.9,
+    "wins 0.93"
+   ],
+   "telos": [
+    1.037,
+    -1.8,
+    "wins 0.24"
+   ]
+  },
+  "threshold": "t>=3 each (Holm)",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "4.2",
+  "check": "REAL non-inferiority vs Alma v2 (gmean ratio, CI upper)",
+  "result": [
+   1.0,
+   1.0
+  ],
+  "threshold": "<= 1.01",
+  "status": "PASS",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "4.2",
+  "check": "REAL latent-rollout forecasts vs direct head (ratio)",
+  "result": 1.027,
+  "threshold": "descriptive",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "4.4",
+  "check": "REAL coverage 80% / 60% (Alma-WM)",
+  "result": {
+   "wm_direct": [
+    0.812,
+    0.623
+   ],
+   "wm_rollout": [
+    0.754,
+    0.563
+   ],
+   "alma_v2": [
+    0.812,
+    0.623
+   ],
+   "telos": [
+    0.793,
+    0.609
+   ]
+  },
+  "threshold": "+-0.02",
+  "status": "FAIL",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "8.2",
+  "check": "effective sample (real tasks)",
+  "result": 29,
+  "threshold": ">=12 preliminary, >=36 frontier",
+  "status": "PASS (preliminary)",
+  "script": "validate/grade.py"
+ },
+ {
+  "gate": "8.6",
+  "check": "Holm correction across all 'beats' claims",
+  "result": {
+   "placebo_true_vs_shuffled": true,
+   "plan_wm_vs_arx": false,
+   "plan_wm_vs_default": true,
+   "real_wm_vs_persistence": true,
+   "real_wm_vs_snaive": true,
+   "real_wm_vs_telos": false,
+   "sim_aware_vs_blind": true,
+   "sim_b1-16_vs_arx": false,
+   "sim_b1-16_vs_persistence": true,
+   "sim_b1-16_vs_snaive24": true,
+   "sim_b17-64_vs_arx": true,
+   "sim_b17-64_vs_persistence": true,
+   "sim_b17-64_vs_snaive24": true,
+   "sim_b257-512_vs_arx": true,
+   "sim_b257-512_vs_persistence": true,
+   "sim_b257-512_vs_snaive24": true,
+   "sim_b65-256_vs_arx": true,
+   "sim_b65-256_vs_persistence": true,
+   "sim_b65-256_vs_snaive24": true,
+   "sim_cf_vs_arx": false
+  },
+  "threshold": "alpha 0.05",
+  "status": "REPORTED",
+  "script": "validate/grade.py"
+ }
+]

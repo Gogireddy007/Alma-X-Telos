@@ -8,5 +8,20 @@
    "sha256": "f648594085dc8ae9e32e64b333fb6045866f01c3ef911b8180ec18c3fda77c92",
    "utc": "2026-11-16T23:50:00Z"
   }
+ },
+ "weights": {
+  "runs/alma_v3/ema_10000.pt": {
+   "sha256": "6b3a28e553732d606db7c2a0d0da6991c0abe083dcc114368a71b7c96bb03eef",
+   "utc": "2026-11-18T10:59:25Z"
+  }
+ },
+ "sealed": {
+  "validation_runs/AlmaV3_fc_20261116T2349Z/sealed_outputs/pred_fc.npz": {
+   "sha256": "e09214b89b688bdca02746ae999687751098945b153cde40bd804369a24570cd",
+   "utc": "2026-11-18T11:10:12Z"
+  }
+ },
+ "truth_loaded": {
+  "real": "2026-11-18T11:10:20Z"
  }
 }

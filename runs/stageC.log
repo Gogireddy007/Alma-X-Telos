@@ -1,0 +1,16 @@
+=== Stage C start Thu Nov 19 11:40:53 PST 2026
+dev2 results/dev2/v3_16k_n256.json exit 0 Thu Nov 19 11:51:18 PST 2026
+dev2 results/dev2/v3_20k_n256.json exit 0 Thu Nov 19 12:01:47 PST 2026
+ensembles[c2]: best v3-family  ->  ; best small results/dev2/stageA_D_bucket_mix_n256.json -> runs/stageA/D_bucket_mix/ema_3000.pt
+dev2 results/dev2/ens_c2_ctx3_n256.json exit 1 Thu Nov 19 12:01:49 PST 2026
+dev2 results/dev2/ens_c2_v3+small_n256.json exit 1 Thu Nov 19 12:01:50 PST 2026
+dev2 results/dev2/ens_c2_v3x2+small_n256.json exit 1 Thu Nov 19 12:01:51 PST 2026
+C3 rule CONT=0 -> v3ser init=runs/alma_v3/ema_10000.pt steps=4000 lr=1e-4 loss=series p_short=0.0 Thu Nov 19 12:01:51 PST 2026
+--- C3 v3ser attempt 1  Thu Nov 19 12:01:51 PST 2026
+C3 v3ser stopped manually Thu Nov 19 12:02:46 PST 2026: v3 later ckpts worse on dev2 (data repetition), reweighting already tested on v3ft; GPU reassigned
+=== ensembles start Thu Nov 19 12:03:07 PST 2026
+dev2 results/dev2/ens_v3+D_n256.json exit 0 Thu Nov 19 12:14:57 PST 2026
+dev2 results/dev2/ens_v3ctx2_n256.json exit 0 Thu Nov 19 12:28:40 PST 2026
+dev2 results/dev2/ens_v3+v3ft+D_n256.json exit 0 Thu Nov 19 12:50:59 PST 2026
+dev2 results/dev2/ens_v3+D+C_n256.json exit 0 Thu Nov 19 13:04:31 PST 2026
+=== ensembles done Thu Nov 19 13:04:31 PST 2026
